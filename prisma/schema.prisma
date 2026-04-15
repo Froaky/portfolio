@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  REQUESTER
+  APPROVER
+  ADMIN
+}
+
+enum RequestStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  fullName      String?
+  role          UserRole  @default(REQUESTER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  requests      Request[] @relation("Requester")
+  approvals     Request[] @relation("Approver")
+  auditLogs     AuditLog[]
+}
+
+model Request {
+  id                String        @id @default(uuid())
+  title             String
+  description       String?
+  status            RequestStatus @default(PENDING)
+  
+  requesterId       String
+  requester         User          @relation("Requester", fields: [requesterId], references: [id])
+  
+  assignedApproverId String?
+  assignedApprover   User?         @relation("Approver", fields: [assignedApproverId], references: [id])
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  auditLogs         AuditLog[]
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  requestId   String
+  request     Request  @relation(fields: [requestId], references: [id])
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  action      String   // e.g., "STATUS_CHANGE", "COMMENT_ADDED"
+  fromStatus  String?
+  toStatus    String?
+  details     Json?
+  
+  createdAt   DateTime @default(now())
+}
