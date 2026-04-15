@@ -13,6 +13,8 @@ export const translations = {
       desc: "I am Froaky. I design high-performance APIs and internal operations tools that bridge business logic with reliable technology.",
       initWork: "INIT_WORK_VIEW",
       getResume: "GET_RESUME",
+      cvPath: "/docs/cv-en.pdf",
+      cvHtmlPath: "/docs/cv-en.html",
     },
     capabilities: {
       tag: "CAPABILITIES.MANIFEST",
@@ -83,6 +85,8 @@ export const translations = {
       desc: "Soy Froaky. Diseño APIs de alto rendimiento y herramientas de operaciones internas que conectan la lógica de negocio con tecnología confiable.",
       initWork: "VER_PROYECTOS",
       getResume: "DESCARGAR_CV",
+      cvPath: "/docs/cv-es.pdf",
+      cvHtmlPath: "/docs/cv-es.html",
     },
     capabilities: {
       tag: "CAPACIDADES.MANIFIESTO",
