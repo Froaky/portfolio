@@ -56,15 +56,15 @@ export default function Home() {
               <p style={{ fontSize: "1.1rem", maxWidth: "480px", marginTop: "1.5rem", color: "rgba(255,255,255,0.6)", borderLeft: "2px solid var(--primary)", paddingLeft: "1.5rem" }}>
                 {t.hero.desc}
               </p>
-              <div style={{ display: "flex", gap: "1rem", marginTop: "3rem", alignItems: "center" }}>
+              <div style={{ display: "flex", gap: "1.5rem", marginTop: "3rem", alignItems: "flex-start" }}>
                 <Link href="#projects" className="btn-modern btn-primary-modern">
                   {t.hero.initWork}
                 </Link>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "center" }}>
                   <a href={t.hero.cvPath} download className="btn-modern">
                     {t.hero.getResume}
                   </a>
-                  <a href={t.hero.cvHtmlPath} target="_blank" className="mono" style={{ fontSize: "0.6rem", opacity: 0.5, textAlign: "center" }}>
+                  <a href={t.hero.cvHtmlPath} target="_blank" className="mono" style={{ fontSize: "0.6rem", opacity: 0.5 }}>
                     [VERSION_WEB]
                   </a>
                 </div>
