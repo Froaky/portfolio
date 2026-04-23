@@ -1,0 +1,12 @@
+﻿
+> porfoliofroaky@0.1.0 lint
+> eslint
+
+
+C:\Users\MateoCoca\Documents\REPOS\porfoliofroaky\src\app\projects\[id]\page.tsx
+   6:10   warning  'motion' is defined but never used                                      @typescript-eslint/no-unused-vars
+  12:16   warning  'setLang' is assigned a value but never used                            @typescript-eslint/no-unused-vars
+  28:113  error    Comments inside children section of tag should be placed inside braces  react/jsx-no-comment-textnodes
+
+Γ£û 3 problems (1 error, 2 warnings)
+

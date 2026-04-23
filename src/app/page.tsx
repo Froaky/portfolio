@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import InteractiveProfile from "@/components/InteractiveProfile";
 import SystemArchitecture from "@/components/SystemArchitecture";
 import { translations } from "@/lib/translations";

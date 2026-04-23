@@ -3,13 +3,12 @@
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { translations } from '@/lib/translations';
 import SystemArchitecture from '@/components/SystemArchitecture';
 
 export default function ProjectDetail() {
   const params = useParams();
-  const [lang, setLang] = useState<'en' | 'es'>('en');
+  const [lang] = useState<'en' | 'es'>('en');
   const t = translations[lang];
   
   const project = t.projects.items.find(p => p.id === params.id);
@@ -26,7 +25,7 @@ export default function ProjectDetail() {
         <div className="grid-modern" style={{ gridTemplateColumns: '1.5fr 1fr', gap: '4rem', alignItems: 'start' }}>
           <div>
             <div className="mono" style={{ color: 'var(--primary)', marginBottom: '1rem', fontSize: '0.7rem' }}>
-              // ARCHIVE.PROJECT.{project.id.toUpperCase()}
+              {"// ARCHIVE.PROJECT."}{project.id.toUpperCase()}
             </div>
             <h1 style={{ fontSize: '3.5rem', marginBottom: '2rem', textTransform: 'uppercase' }}>
               {project.title}

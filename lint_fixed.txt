@@ -1,0 +1,19 @@
+﻿
+> porfoliofroaky@0.1.0 lint
+> eslint
+
+
+C:\Users\MateoCoca\Documents\REPOS\porfoliofroaky\src\app\page.tsx
+  5:10  warning  'motion' is defined but never used           @typescript-eslint/no-unused-vars
+  5:18  warning  'AnimatePresence' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\MateoCoca\Documents\REPOS\porfoliofroaky\src\app\projects\[id]\page.tsx
+   6:10   warning  'motion' is defined but never used                                      @typescript-eslint/no-unused-vars
+  12:16   warning  'setLang' is assigned a value but never used                            @typescript-eslint/no-unused-vars
+  28:113  error    Comments inside children section of tag should be placed inside braces  react/jsx-no-comment-textnodes
+
+C:\Users\MateoCoca\Documents\REPOS\porfoliofroaky\src\app\projects\odoo-customization\page.tsx
+  58:19  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+Γ£û 6 problems (2 errors, 4 warnings)
+

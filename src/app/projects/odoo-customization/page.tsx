@@ -55,7 +55,7 @@ export default function OdooProject() {
             <p>
               We chose to build <strong>inside Odoo</strong> instead of a standalone middleware 
               to maintain single-source-of-truth integrity, despite the increased complexity of 
-              Odoo's ORM for certain high-load operations.
+              Odoo&apos;s ORM for certain high-load operations.
             </p>
 
             <h2 style={{ marginTop: "3rem" }}>Outcome</h2>
