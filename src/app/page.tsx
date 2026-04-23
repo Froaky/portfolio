@@ -105,14 +105,20 @@ export default function Home() {
             <div className="grid-modern">
               {t.projects.items.map((item, i) => (
                 <div key={i} className="glass-card" style={i === 0 ? { borderLeft: "4px solid var(--primary)" } : {}}>
-                  <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
-                    {item.badge.map(b => <span key={b} className="badge">{b}</span>)}
+                  <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
+                    {item.tech.map(b => <span key={b} className="badge">{b}</span>)}
                   </div>
-                  <h3 className="mono">{item.title}</h3>
-                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)" }}>{item.desc}</p>
-                  <Link href={i === 0 ? "/opsflow" : (i === 1 ? "/projects/odoo-customization" : "/projects/resource-management")} className={i === 0 ? "btn-modern" : "mono"} style={i === 0 ? { marginTop: "1.5rem", width: "100%", textAlign: "center", display: "block" } : { color: "var(--primary)", marginTop: "1.5rem", display: "block", fontSize: "0.75rem" }}>
-                    {item.btn}
-                  </Link>
+                  <h3 className="mono" style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>{item.title}</h3>
+                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", minHeight: "4.5rem" }}>{item.desc}</p>
+                  <a 
+                    href={item.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn-modern" 
+                    style={{ marginTop: "1.5rem", width: "100%", textAlign: "center", display: "block" }}
+                  >
+                    {lang === 'en' ? "EXEC_PROCESS_VIEW" : "EJECUTAR_PROCESO_VER"}
+                  </a>
                 </div>
               ))}
             </div>
