@@ -90,6 +90,7 @@ export default function Home() {
                 <div key={i} className="glass-card">
                   <div className="mono" style={{ color: "var(--primary)", marginBottom: "1rem", fontSize: "0.6rem" }}>{item.tag}</div>
                   <h3>{item.title}</h3>
+                  <div className="hud-line" style={{ width: "40%", opacity: 0.3 }} />
                   <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)" }}>{item.desc}</p>
                 </div>
               ))}
@@ -109,13 +110,29 @@ export default function Home() {
                     {item.tech.map(b => <span key={b} className="badge">{b}</span>)}
                   </div>
                   <h3 className="mono" style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>{item.title}</h3>
-                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", minHeight: "4.5rem" }}>{item.desc}</p>
+                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", marginBottom: "1.5rem" }}>{item.desc}</p>
+                  
+                  <div style={{ padding: "1rem", background: "rgba(0, 243, 255, 0.05)", borderLeft: "2px solid var(--primary)", marginBottom: "1.5rem", borderRadius: "0 0.5rem 0.5rem 0" }}>
+                    <div className="mono" style={{ fontSize: "0.6rem", color: "var(--primary)", marginBottom: "0.4rem", opacity: 0.8 }}>
+                      {t.labels.challenge}
+                    </div>
+                    <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.8)", marginBottom: "0.8rem" }}>
+                      {item.challenge}
+                    </div>
+                    <div className="mono" style={{ fontSize: "0.6rem", color: "var(--accent)", marginBottom: "0.4rem", opacity: 0.8 }}>
+                      {t.labels.impact}
+                    </div>
+                    <div style={{ fontSize: "0.8rem", color: "var(--foreground)", fontWeight: 500 }}>
+                      {item.impact}
+                    </div>
+                  </div>
+
                   <a 
                     href={item.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn-modern" 
-                    style={{ marginTop: "1.5rem", width: "100%", textAlign: "center", display: "block" }}
+                    style={{ marginTop: "auto", width: "100%", textAlign: "center", display: "block" }}
                   >
                     {lang === 'en' ? "EXEC_PROCESS_VIEW" : "EJECUTAR_PROCESO_VER"}
                   </a>
