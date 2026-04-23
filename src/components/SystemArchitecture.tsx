@@ -116,10 +116,10 @@ export default function SystemArchitecture({ id }: { id?: string }) {
             {/* Neural Connections */}
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
-              const x1 = 200 + Math.cos(rad) * 40;
-              const y1 = 100 + Math.sin(rad) * 40;
-              const x2 = 200 + Math.cos(rad) * 120;
-              const y2 = 100 + Math.sin(rad) * 120;
+              const x1 = Number((200 + Math.cos(rad) * 40).toFixed(2));
+              const y1 = Number((100 + Math.sin(rad) * 40).toFixed(2));
+              const x2 = Number((200 + Math.cos(rad) * 120).toFixed(2));
+              const y2 = Number((100 + Math.sin(rad) * 120).toFixed(2));
               
               return (
                 <g key={i}>
