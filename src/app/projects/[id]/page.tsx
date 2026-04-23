@@ -1,14 +1,14 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
 import Link from 'next/link';
 import { translations } from '@/lib/translations';
 import SystemArchitecture from '@/components/SystemArchitecture';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ProjectDetail() {
   const params = useParams();
-  const [lang] = useState<'en' | 'es'>('en');
+  const { lang } = useLanguage();
   const t = translations[lang];
   
   const project = t.projects.items.find(p => p.id === params.id);

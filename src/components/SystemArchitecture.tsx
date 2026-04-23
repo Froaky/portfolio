@@ -106,8 +106,32 @@ export default function SystemArchitecture({ id }: { id?: string }) {
       default:
         return (
           <svg className="w-full h-full" viewBox="0 0 400 200">
-            <motion.rect x="50" y="80" width="300" height="40" fill="rgba(59, 130, 246, 0.05)" stroke="var(--primary)" strokeDasharray="4 4" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 3, repeat: Infinity }} />
-            <text x="200" y="105" textAnchor="middle" fill="white" style={{ fontSize: '8px', letterSpacing: '2px' }}>[SYSTEM_CORE_INITIALIZING...]</text>
+            {/* Central Brain Hub */}
+            <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }}>
+              <circle cx="200" cy="100" r="40" fill="rgba(59, 130, 246, 0.05)" stroke="var(--primary)" strokeWidth="1" strokeDasharray="5 5" />
+              <motion.circle cx="200" cy="100" r="30" fill="rgba(59, 130, 246, 0.1)" stroke="var(--primary)" strokeWidth="2" animate={{ r: [30, 35, 30], opacity: [0.5, 1, 0.5] }} transition={{ duration: 4, repeat: Infinity }} />
+              <text x="200" y="103" textAnchor="middle" fill="white" style={{ fontSize: '8px', fontWeight: 'bold' }}>FROAKY_CORE</text>
+            </motion.g>
+
+            {/* Neural Connections */}
+            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              const x1 = 200 + Math.cos(rad) * 40;
+              const y1 = 100 + Math.sin(rad) * 40;
+              const x2 = 200 + Math.cos(rad) * 120;
+              const y2 = 100 + Math.sin(rad) * 120;
+              
+              return (
+                <g key={i}>
+                  <motion.line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--primary)" strokeWidth="0.5" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, delay: i * 0.2 }} />
+                  <motion.circle cx={x2} cy={y2} r="15" fill="rgba(0, 243, 255, 0.05)" stroke="var(--accent)" strokeWidth="0.5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 + i * 0.2 }} />
+                  <motion.circle cx={x2} cy={y2} r="2" fill="var(--accent)" animate={{ opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }} />
+                </g>
+              );
+            })}
+
+            {/* Orbitals */}
+            <motion.circle cx="200" cy="100" r="140" fill="none" stroke="var(--primary)" strokeWidth="0.2" opacity="0.2" strokeDasharray="10 10" animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: 'linear' }} />
           </svg>
         );
     }
