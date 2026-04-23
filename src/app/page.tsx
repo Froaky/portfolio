@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import InteractiveProfile from "@/components/InteractiveProfile";
+import SystemArchitecture from "@/components/SystemArchitecture";
 import { translations } from "@/lib/translations";
 
 export default function Home() {
@@ -79,6 +80,26 @@ export default function Home() {
           </div>
         </header>
 
+        <section className="section" style={{ borderTop: "1px solid var(--border)", background: "rgba(0, 243, 255, 0.02)" }}>
+          <div className="container">
+            <div className="grid-modern" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "4rem" }}>
+              <div>
+                <div className="section-tag">{t.capabilities.methodologies.tag}</div>
+                <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>{t.capabilities.methodologies.title}</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                  {t.capabilities.methodologies.items.map((item, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                      <div style={{ width: "8px", height: "8px", background: "var(--primary)", borderRadius: "2px" }} />
+                      <span className="mono" style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.8)" }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <SystemArchitecture />
+            </div>
+          </div>
+        </section>
+
         <section className="section" id="capabilities">
           <div className="container">
             <div className="section-tag">{t.capabilities.tag}</div>
@@ -141,6 +162,18 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section className="section" style={{ borderTop: "1px solid var(--border)", background: "rgba(0, 0, 0, 0.2)" }}>
+          <div className="container">
+            <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "2rem" }}>
+              {t.stats.map((stat, i) => (
+                <div key={i} style={{ borderLeft: "1px solid var(--primary)", paddingLeft: "1.5rem" }}>
+                  <div className="mono" style={{ fontSize: "0.6rem", color: "var(--primary)", marginBottom: "0.5rem" }}>{stat.label}</div>
+                  <div style={{ fontSize: "2rem", fontWeight: 700, letterSpacing: "-0.02em" }}>{stat.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer id="contact" style={{ padding: "8rem 0 4rem", borderTop: "1px solid var(--border)", position: "relative" }}>
@@ -155,7 +188,7 @@ export default function Home() {
               <a href="https://github.com/mateococa" target="_blank" className="btn-modern">GITHUB</a>
             </div>
             <div className="mono" style={{ marginTop: "4rem", opacity: 0.3, fontSize: "0.7rem" }}>
-              &copy; {new Date().getFullYear()} FROAKY_SYSTEMS_ANALYST_DEVEL // VER_2.1.0
+              &copy; {new Date().getFullYear()} FROAKY_SYSTEMS_ANALYST_DEVEL // VER_2.2.0
             </div>
           </div>
         </div>

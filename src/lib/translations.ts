@@ -16,6 +16,11 @@ export const translations = {
       cvPath: "/docs/cv-en.pdf",
       cvHtmlPath: "/docs/cv-en.html",
     },
+    stats: [
+      { label: "Systems Integrated", value: "12+" },
+      { label: "Logic Blocks", value: "500+" },
+      { label: "Process Optimization", value: "99.9%" },
+    ],
     capabilities: {
       tag: "CAPABILITIES.MANIFEST",
       title: "Solving Complex",
@@ -37,6 +42,16 @@ export const translations = {
           desc: "Designing scalable SQL-backed systems with clean data modeling, optimized indexing, and maintainable architectures.",
         },
       ],
+      methodologies: {
+        tag: "ANALYSIS_CORE",
+        title: "Operational Analysis",
+        items: [
+          "Data Auditing & Integrity",
+          "Process Cycle Optimization",
+          "Multi-tenant Architecture",
+          "Legacy System Migration",
+        ]
+      }
     },
     projects: {
       tag: "ARCHIVE.PROJECTS",
@@ -110,6 +125,11 @@ export const translations = {
       cvPath: "/docs/cv-es.pdf",
       cvHtmlPath: "/docs/cv-es.html",
     },
+    stats: [
+      { label: "Sistemas Integrados", value: "12+" },
+      { label: "Bloques de Lógica", value: "500+" },
+      { label: "Optimización de Procesos", value: "99.9%" },
+    ],
     capabilities: {
       tag: "CAPACIDADES.MANIFIESTO",
       title: "Resolviendo Desafíos",
@@ -131,6 +151,16 @@ export const translations = {
           desc: "Diseño de sistemas escalables basados en SQL con modelado de datos limpio, indexación optimizada y arquitecturas mantenibles.",
         },
       ],
+      methodologies: {
+        tag: "CORE_ANALISIS",
+        title: "Análisis Operacional",
+        items: [
+          "Auditoría e Integridad de Datos",
+          "Optimización de Ciclos de Proceso",
+          "Arquitecturas Multi-tenant",
+          "Migración de Sistemas Heredados",
+        ]
+      }
     },
     projects: {
       tag: "ARCHIVO.PROYECTOS",
