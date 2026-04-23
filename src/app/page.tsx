@@ -126,7 +126,19 @@ export default function Home() {
             
             <div className="grid-modern">
               {t.projects.items.map((item, i) => (
-                <div key={i} className="glass-card" style={i === 0 ? { borderLeft: "4px solid var(--primary)" } : {}}>
+                <Link 
+                  href={`/projects/${item.id}`} 
+                  key={i} 
+                  className="glass-card hover-glow" 
+                  style={{ 
+                    display: "flex", 
+                    flexDirection: "column",
+                    textDecoration: "none",
+                    color: "inherit",
+                    transition: "all 0.3s ease",
+                    borderLeft: i === 0 ? "4px solid var(--primary)" : "1px solid var(--border)"
+                  }}
+                >
                   <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
                     {item.tech.map(b => <span key={b} className="badge">{b}</span>)}
                   </div>
@@ -148,16 +160,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <a 
-                    href={item.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-modern" 
-                    style={{ marginTop: "auto", width: "100%", textAlign: "center", display: "block" }}
-                  >
-                    {lang === 'en' ? "EXEC_PROCESS_VIEW" : "EJECUTAR_PROCESO_VER"}
-                  </a>
-                </div>
+                  <div className="btn-modern" style={{ marginTop: "auto", width: "100%", textAlign: "center" }}>
+                    {lang === 'en' ? "VIEW_TECHNICAL_DEEP_DIVE" : "VER_DETALLE_TECNICO"}
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
