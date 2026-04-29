@@ -103,6 +103,36 @@ export default function SystemArchitecture({ id }: { id?: string }) {
             </motion.g>
           </svg>
         );
+      case 'opsflow':
+        return (
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* State Machine Nodes */}
+            <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={nodeTransition}>
+              <polygon points="50,100 80,70 110,100 80,130" fill="rgba(59, 130, 246, 0.05)" stroke="var(--primary)" strokeWidth="1" />
+              <text x="80" y="102" textAnchor="middle" fill="white" style={{ fontSize: '5px' }}>DRAFT_STATE</text>
+            </motion.g>
+
+            <motion.path d="M 110 100 H 160" stroke="var(--primary)" strokeWidth="1" strokeDasharray="4 2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={lineTransition} />
+            <motion.circle cx="135" cy="100" r="2" fill="var(--primary)" animate={{ opacity: [0, 1, 0], x: [-10, 10] }} transition={{ duration: 2, repeat: Infinity }} />
+
+            <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...nodeTransition, delay: 1.5 }}>
+              <polygon points="160,100 190,70 220,100 190,130" fill="rgba(14, 165, 233, 0.1)" stroke="var(--accent)" strokeWidth="1.5" />
+              <text x="190" y="102" textAnchor="middle" fill="white" style={{ fontSize: '5px', fontWeight: 'bold' }}>PENDING_APPROVAL</text>
+              <motion.rect x="180" y="115" width="20" height="2" fill="var(--accent)" animate={{ opacity: [0.2, 1, 0.2] }} transition={{ duration: 1.5, repeat: Infinity }} />
+            </motion.g>
+
+            <motion.path d="M 220 100 H 270" stroke="var(--accent)" strokeWidth="1.5" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 3 }} />
+            
+            <motion.g initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...nodeTransition, delay: 4.5 }}>
+              <polygon points="270,100 300,70 330,100 300,130" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" strokeWidth="2" />
+              <text x="300" y="102" textAnchor="middle" fill="white" style={{ fontSize: '5px' }}>AUTHORIZED</text>
+            </motion.g>
+
+            {/* Rejection Path */}
+            <motion.path d="M 190 130 L 190 160 L 80 160 L 80 130" stroke="var(--destructive, #ef4444)" strokeWidth="0.5" fill="none" strokeDasharray="2 2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 3 }} />
+            <motion.text x="135" y="155" textAnchor="middle" fill="var(--destructive, #ef4444)" style={{ fontSize: '4px' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 5 }}>[REJECTED_FALLBACK]</motion.text>
+          </svg>
+        );
       default:
         return (
           <svg className="w-full h-full" viewBox="0 0 400 200">
