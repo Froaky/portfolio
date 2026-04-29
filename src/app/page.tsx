@@ -139,18 +139,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="section" style={{ borderTop: "1px solid var(--border)", background: "rgba(0, 0, 0, 0.2)" }}>
-          <div className="container">
-            <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "2rem" }}>
-              {t.stats.map((stat, i) => (
-                <div key={i} style={{ borderLeft: "1px solid var(--primary)", paddingLeft: "1.5rem" }}>
-                  <div className="mono" style={{ fontSize: "0.6rem", color: "var(--primary)", marginBottom: "0.5rem" }}>{stat.label}</div>
-                  <div style={{ fontSize: "2rem", fontWeight: 700, letterSpacing: "-0.02em" }}>{stat.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer id="contact" style={{ padding: "8rem 0 4rem", borderTop: "1px solid var(--border)", position: "relative" }}>

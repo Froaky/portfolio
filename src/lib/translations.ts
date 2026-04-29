@@ -1,9 +1,9 @@
 export const translations = {
   en: {
     nav: {
-      projects: "01.Projects",
-      services: "02.Services",
-      contact: "03.Contact",
+      projects: "Projects",
+      services: "Services",
+      contact: "Contact",
       src: "SRC_CODE",
       back: "BACK_TO_COMMAND_CENTER",
     },
@@ -17,11 +17,6 @@ export const translations = {
       cvPath: "/docs/cv-en.pdf",
       cvHtmlPath: "/docs/cv-en.html",
     },
-    stats: [
-      { label: "Systems Integrated", value: "12+" },
-      { label: "Logic Blocks", value: "500+" },
-      { label: "Process Optimization", value: "99.9%" },
-    ],
     capabilities: {
       tag: "CAPABILITIES.MANIFEST",
       title: "Solving Complex",
@@ -119,9 +114,9 @@ export const translations = {
   },
   es: {
     nav: {
-      projects: "01.Proyectos",
-      services: "02.Servicios",
-      contact: "03.Contacto",
+      projects: "Proyectos",
+      services: "Servicios",
+      contact: "Contacto",
       src: "CODIGO_FUERTE",
       back: "VOLVER_AL_CENTRO_DE_MANDO",
     },
@@ -135,11 +130,6 @@ export const translations = {
       cvPath: "/docs/cv-es.pdf",
       cvHtmlPath: "/docs/cv-es.html",
     },
-    stats: [
-      { label: "Sistemas Integrados", value: "12+" },
-      { label: "Bloques de Lógica", value: "500+" },
-      { label: "Optimización de Procesos", value: "99.9%" },
-    ],
     capabilities: {
       tag: "CAPACIDADES.MANIFIESTO",
       title: "Resolviendo Desafíos",
