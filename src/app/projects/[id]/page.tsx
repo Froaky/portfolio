@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { translations } from '@/lib/translations';
 import SystemArchitecture from '@/components/SystemArchitecture';
 import { useLanguage } from '@/context/LanguageContext';
+import TechCube from '@/components/TechCube';
 
 export default function ProjectDetail() {
   const params = useParams();
@@ -13,77 +14,188 @@ export default function ProjectDetail() {
   
   const project = t.projects.items.find(p => p.id === params.id);
 
-  if (!project) return <div className="p-20 mono">PROJECT_NOT_FOUND_404</div>;
+  if (!project) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--background)' }}>
+      <div style={{ textAlign: 'center' }}>
+        <h1 style={{ fontSize: '4rem', fontWeight: 800, marginBottom: '1rem' }}>404</h1>
+        <p className="mono" style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Project not found</p>
+        <Link href="/" className="btn-modern">← Back</Link>
+      </div>
+    </div>
+  );
+
+  const isEn = lang === 'en';
 
   return (
-    <div className="min-h-screen bg-[var(--background)] py-20">
+    <div className="min-h-screen" style={{ background: 'var(--background)', paddingTop: '7rem', paddingBottom: '6rem' }}>
       <div className="container">
-        <Link href="/" className="mono" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '4rem' }}>
-          <span style={{ fontSize: '1.2rem' }}>←</span> {t.nav.back}
+        {/* Minimal breadcrumb */}
+        <Link 
+          href="/" 
+          style={{ 
+            color: 'var(--text-muted)', 
+            textDecoration: 'none', 
+            fontSize: '0.85rem', 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.5rem', 
+            marginBottom: '3rem',
+            transition: 'color 0.2s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'white')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+        >
+          <span>←</span> {isEn ? 'Back' : 'Volver'}
         </Link>
 
-        <div className="grid-modern" style={{ gridTemplateColumns: '1.5fr 1fr', gap: '4rem', alignItems: 'start' }}>
-          <div>
-            <div className="mono" style={{ color: 'var(--primary)', marginBottom: '1rem', fontSize: '0.7rem' }}>
-              {"// ARCHIVE.PROJECT."}{project.id.toUpperCase()}
-            </div>
-            <h1 style={{ fontSize: '3.5rem', marginBottom: '2rem', textTransform: 'uppercase' }}>
-              {project.title}
-            </h1>
-            
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-              {project.tech.map(tag => (
-                <span key={tag} className="badge" style={{ padding: '0.5rem 1rem' }}>{tag}</span>
-              ))}
-            </div>
+        {/* Header */}
+        <div style={{ marginBottom: '4rem' }}>
+          <div className="section-tag" style={{ marginBottom: '1.5rem' }}>
+            {project.id.toUpperCase().replace('-', '_')}
+          </div>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>
+            {project.title}
+          </h1>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            {project.tech.map(tag => (
+              <span key={tag} className="badge">{tag}</span>
+            ))}
+          </div>
+        </div>
 
-            <div style={{ padding: '2rem', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border)', borderRadius: '1rem', marginBottom: '3rem' }}>
-              <h3 className="mono" style={{ color: 'var(--primary)', fontSize: '0.8rem', marginBottom: '1.5rem' }}>TECHNICAL_SUMMARY</h3>
-              <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', lineHeight: '1.8' }}>
+        <div className="grid-modern" style={{ gridTemplateColumns: '1.5fr 1fr', gap: '5rem', alignItems: 'start' }}>
+          {/* Main Content */}
+          <div>
+            {/* Technical Summary */}
+            <div style={{ 
+              padding: '2rem', 
+              background: 'rgba(255,255,255,0.015)', 
+              border: '1px solid var(--border)', 
+              borderRadius: '12px', 
+              marginBottom: '3rem' 
+            }}>
+              <div className="mono" style={{ 
+                fontSize: '0.65rem', 
+                color: 'var(--accent)', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.15em',
+                marginBottom: '1.25rem' 
+              }}>
+                {isEn ? 'TECHNICAL SUMMARY' : 'RESUMEN TÉCNICO'}
+              </div>
+              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.8' }}>
                 {project.fullDesc}
               </p>
             </div>
 
-            <div style={{ marginBottom: '4rem' }}>
-              <h3 className="mono" style={{ color: 'var(--primary)', fontSize: '0.8rem', marginBottom: '2rem' }}>KEY_CAPABILITIES</h3>
-              <div className="grid-modern" style={{ gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            {/* Key Capabilities */}
+            <div style={{ marginBottom: '3.5rem' }}>
+              <div className="mono" style={{ 
+                fontSize: '0.65rem', 
+                color: 'var(--accent)', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.15em',
+                marginBottom: '1.5rem' 
+              }}>
+                {isEn ? 'KEY CAPABILITIES' : 'CAPACIDADES CLAVE'}
+              </div>
+              <div className="grid-modern" style={{ gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 {project.features.map((feat, i) => (
-                  <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--accent)', background: 'rgba(14, 165, 233, 0.03)' }}>
-                    <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{feat}</div>
+                  <div key={i} style={{ 
+                    padding: '1.25rem', 
+                    borderLeft: '2px solid var(--border)', 
+                    background: 'rgba(255,255,255,0.01)',
+                    borderRadius: '0 6px 6px 0',
+                    transition: 'border-color 0.2s',
+                  }}>
+                    <div style={{ fontWeight: 500, fontSize: '0.9rem', color: 'var(--foreground)' }}>{feat}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-modern btn-primary-modern"
-              style={{ width: '100%', textAlign: 'center', display: 'block', fontSize: '1.1rem' }}
-            >
-              {lang === 'en' ? 'EXECUTE_LIVE_DEPLOYMENT' : 'EJECUTAR_DESPLIEGUE_VIVO'}
-            </a>
+            {/* Project Tech Stack (3D cubes) */}
+            <div style={{ marginBottom: '3.5rem' }}>
+              <div className="mono" style={{ 
+                fontSize: '0.65rem', 
+                color: 'var(--accent)', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.15em',
+                marginBottom: '1.5rem' 
+              }}>
+                {isEn ? 'ENGINE_SPECIFICATIONS' : 'ESPECIFICACIONES_DEL_MOTOR'}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {project.tech.map((techName) => (
+                  <TechCube 
+                    key={techName}
+                    name={techName}
+                    category={isEn ? 'ENGINE SPEC' : 'SPEC MOTOR'}
+                    isEn={isEn}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Challenge & Impact */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3rem' }}>
+              <div style={{ paddingLeft: '1.25rem', borderLeft: '1.5px solid var(--accent)' }}>
+                <div className="mono" style={{ fontSize: '0.55rem', color: 'var(--text-muted)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  {isEn ? 'CHALLENGE' : 'DESAFÍO'}
+                </div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--foreground)', opacity: 0.85 }}>{project.challenge}</div>
+              </div>
+              <div style={{ paddingLeft: '1.25rem', borderLeft: '1.5px solid var(--border)' }}>
+                <div className="mono" style={{ fontSize: '0.55rem', color: 'var(--text-muted)', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  {isEn ? 'IMPACT' : 'IMPACTO'}
+                </div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>{project.impact}</div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            {project.link !== '#' && (
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-modern btn-primary-modern"
+                style={{ display: 'inline-flex', fontSize: '0.85rem' }}
+              >
+                {isEn ? 'Visit Live Site →' : 'Visitar Sitio →'}
+              </a>
+            )}
           </div>
 
-          <aside style={{ position: 'sticky', top: '2rem' }}>
-            <div className="section-tag" style={{ marginBottom: '1.5rem' }}>ARCHITECTURE_HUD</div>
+          {/* Sidebar */}
+          <aside style={{ position: 'sticky', top: '6rem' }}>
+            <div className="section-tag" style={{ marginBottom: '1.25rem' }}>
+              {isEn ? 'ARCHITECTURE' : 'ARQUITECTURA'}
+            </div>
             <SystemArchitecture id={project.id} />
             
-            <div style={{ marginTop: '2rem', padding: '1.5rem', border: '1px solid var(--border)', borderRadius: '0.5rem' }}>
-              <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--primary)', marginBottom: '1rem' }}>PROJECT_METRICS</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ 
+              marginTop: '1.5rem', 
+              padding: '1.25rem', 
+              border: '1px solid var(--border)', 
+              borderRadius: '8px',
+              background: 'rgba(255,255,255,0.01)'
+            }}>
+              <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--text-muted)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                {isEn ? 'PROJECT METRICS' : 'MÉTRICAS'}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span className="mono" style={{ fontSize: '0.7rem', opacity: 0.5 }}>STATUS</span>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: '#10b981' }}>OPERATIONAL</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Status</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: '#10b981' }}>Operational</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span className="mono" style={{ fontSize: '0.7rem', opacity: 0.5 }}>SECURITY</span>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--accent)' }}>ENCRYPTED</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Security</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>AES-256</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span className="mono" style={{ fontSize: '0.7rem', opacity: 0.5 }}>UPTIME</span>
-                  <span className="mono" style={{ fontSize: '0.7rem' }}>99.98%</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Uptime</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>99.98%</span>
                 </div>
               </div>
             </div>

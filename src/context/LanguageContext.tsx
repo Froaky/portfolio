@@ -1,8 +1,11 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useSyncExternalStore } from 'react';
 
 type Language = 'en' | 'es';
+const DEFAULT_LANGUAGE: Language = 'en';
+const LANGUAGE_STORAGE_KEY = 'froaky-lang';
+const LANGUAGE_CHANGE_EVENT = 'froaky-lang-change';
 
 interface LanguageContextType {
   lang: Language;
@@ -11,20 +14,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Language>('en');
+function getStoredLanguage(): Language {
+  if (typeof window === 'undefined') return DEFAULT_LANGUAGE;
 
-  // Load from localStorage if available
-  useEffect(() => {
-    const saved = localStorage.getItem('froaky-lang') as Language;
-    if (saved) setLang(saved);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return saved === 'en' || saved === 'es' ? saved : DEFAULT_LANGUAGE;
+}
+
+function subscribeToLanguageChange(onStoreChange: () => void) {
+  window.addEventListener('storage', onStoreChange);
+  window.addEventListener(LANGUAGE_CHANGE_EVENT, onStoreChange);
+
+  return () => {
+    window.removeEventListener('storage', onStoreChange);
+    window.removeEventListener(LANGUAGE_CHANGE_EVENT, onStoreChange);
+  };
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const lang = useSyncExternalStore(
+    subscribeToLanguageChange,
+    getStoredLanguage,
+    () => DEFAULT_LANGUAGE
+  );
 
   const toggleLang = () => {
     const newLang = lang === 'en' ? 'es' : 'en';
-    setLang(newLang);
-    localStorage.setItem('froaky-lang', newLang);
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, newLang);
+    window.dispatchEvent(new Event(LANGUAGE_CHANGE_EVENT));
   };
 
   return (
