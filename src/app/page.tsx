@@ -1,10 +1,14 @@
 'use client';
 
-import Link from "next/link";
 import InteractiveProfile from "@/components/InteractiveProfile";
 import SystemArchitecture from "@/components/SystemArchitecture";
+import TerminalHero from "@/components/TerminalHero";
+import MissionDossier from "@/components/MissionDossier";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/context/LanguageContext";
+import TiltCard from "@/components/TiltCard";
+import TechCube from "@/components/TechCube";
+
 
 export default function Home() {
   const { lang } = useLanguage();
@@ -17,41 +21,18 @@ export default function Home() {
       <main>
         <header className="hero-modern">
           <div className="container hero-content">
+            <TerminalHero 
+              title={t.hero.title}
+              subtitle={t.hero.titleAccent}
+              desc={t.hero.desc}
+            />
             <div style={{ position: "relative" }}>
-              <div className="mono" style={{ color: "var(--primary)", marginBottom: "1rem", opacity: 0.8 }}>
-                {t.hero.tag}
-              </div>
-              <h1>
-                {t.hero.title} <br />
-                <span className="text-gradient">{t.hero.titleAccent}</span>
-              </h1>
-              <p style={{ fontSize: "1.1rem", maxWidth: "480px", marginTop: "1.5rem", color: "rgba(255,255,255,0.6)", borderLeft: "2px solid var(--primary)", paddingLeft: "1.5rem" }}>
-                {t.hero.desc}
-              </p>
-              <div style={{ display: "flex", gap: "1.5rem", marginTop: "3rem", alignItems: "flex-start" }}>
-                <Link href="#projects" className="btn-modern btn-primary-modern">
-                  {t.hero.initWork}
-                </Link>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "center" }}>
-                  <a href={t.hero.cvPath} download className="btn-modern">
-                    {t.hero.getResume}
-                  </a>
-                  <a href={t.hero.cvHtmlPath} target="_blank" className="mono" style={{ fontSize: "0.6rem", opacity: 0.5 }}>
-                    [VERSION_WEB]
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div style={{ position: "relative" }}>
-              <div className="mono" style={{ position: "absolute", top: "-20px", right: "0", opacity: 0.3, fontSize: "0.6rem" }}>
-                IMG_SCAN_001.JPG [ACTIVE]
-              </div>
               <InteractiveProfile src="/mateo.jpg" />
             </div>
           </div>
         </header>
 
-        <section className="section" style={{ borderTop: "1px solid var(--border)", background: "rgba(0, 243, 255, 0.02)" }}>
+        <section className="section" style={{ borderTop: "1px solid var(--border)", background: "rgba(255, 255, 255, 0.01)" }}>
           <div className="container">
             <div className="grid-modern" style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center", gap: "4rem" }}>
               <div>
@@ -79,62 +60,58 @@ export default function Home() {
             </h2>
             <div className="grid-modern">
               {t.capabilities.items.map((item, i) => (
-                <div key={i} className="glass-card">
-                  <div className="mono" style={{ color: "var(--primary)", marginBottom: "1rem", fontSize: "0.6rem" }}>{item.tag}</div>
-                  <h3>{item.title}</h3>
-                  <div className="hud-line" style={{ width: "40%", opacity: 0.3 }} />
-                  <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)" }}>{item.desc}</p>
-                </div>
+                <TiltCard key={i} className="glass-card" maxTilt={8}>
+                  <div className="mono" style={{ color: "var(--primary)", marginBottom: "1rem", fontSize: "0.6rem", transform: "translateZ(20px)" }}>{item.tag}</div>
+                  <h3 style={{ transform: "translateZ(30px)" }}>{item.title}</h3>
+                  <div className="hud-line" style={{ width: "40%", opacity: 0.3, transform: "translateZ(15px)" }} />
+                  <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)", transform: "translateZ(25px)" }}>{item.desc}</p>
+                </TiltCard>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section" id="projects" style={{ background: "rgba(255,255,255,0.01)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+        <section className="section tech-stack-section" id="specs">
+          <div className="container">
+            <div className="tech-stack-heading">
+              <div className="section-tag">{t.skills.tag}</div>
+              <h2 className="tech-stack-title">
+                {t.skills.title} <span className="text-gradient">{t.skills.titleAccent}</span>
+              </h2>
+            </div>
+
+            <div className="tech-stack-categories">
+              {t.skills.categories.map((cat, i) => (
+                <section className="tech-category" key={i}>
+                  <h3 className="tech-category-title mono">
+                    {"// "}{cat.name}
+                  </h3>
+                  <div className="tech-grid">
+                    {cat.items.map((skillName) => (
+                      <TechCube 
+                        key={skillName}
+                        name={skillName}
+                        category={cat.name.replace('_', ' ')}
+                        isEn={lang === 'en'}
+                      />
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="projects" style={{ background: "rgba(0,0,0,0.2)", borderTop: "1px solid var(--border)" }}>
           <div className="container">
             <div className="section-tag">{t.projects.tag}</div>
-            <h2 style={{ fontSize: "2.5rem", marginBottom: "4rem", textTransform: "uppercase" }}>{t.projects.title} <span className="text-gradient">{t.projects.titleAccent}</span></h2>
+            <h2 style={{ fontSize: "3rem", marginBottom: "6rem", textTransform: "uppercase", fontWeight: 800 }}>
+              Operational <span className="text-gradient">Portfolio.</span>
+            </h2>
             
-            <div className="grid-modern">
+            <div>
               {t.projects.items.map((item, i) => (
-                <Link 
-                  href={`/projects/${item.id}`} 
-                  key={i} 
-                  className="glass-card hover-glow" 
-                  style={{ 
-                    display: "flex", 
-                    flexDirection: "column",
-                    textDecoration: "none",
-                    color: "inherit",
-                    transition: "all 0.3s ease",
-                    borderLeft: i === 0 ? "4px solid var(--primary)" : "1px solid var(--border)"
-                  }}
-                >
-                  <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
-                    {item.tech.map(b => <span key={b} className="badge">{b}</span>)}
-                  </div>
-                  <h3 className="mono" style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>{item.title}</h3>
-                  <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", marginBottom: "1.5rem" }}>{item.desc}</p>
-                  
-                  <div style={{ padding: "1rem", background: "rgba(0, 243, 255, 0.05)", borderLeft: "2px solid var(--primary)", marginBottom: "1.5rem", borderRadius: "0 0.5rem 0.5rem 0" }}>
-                    <div className="mono" style={{ fontSize: "0.6rem", color: "var(--primary)", marginBottom: "0.4rem", opacity: 0.8 }}>
-                      {t.labels.challenge}
-                    </div>
-                    <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.8)", marginBottom: "0.8rem" }}>
-                      {item.challenge}
-                    </div>
-                    <div className="mono" style={{ fontSize: "0.6rem", color: "var(--accent)", marginBottom: "0.4rem", opacity: 0.8 }}>
-                      {t.labels.impact}
-                    </div>
-                    <div style={{ fontSize: "0.8rem", color: "var(--foreground)", fontWeight: 500 }}>
-                      {item.impact}
-                    </div>
-                  </div>
-
-                  <div className="btn-modern" style={{ marginTop: "auto", width: "100%", textAlign: "center" }}>
-                    {lang === 'en' ? "VIEW_TECHNICAL_DEEP_DIVE" : "VER_DETALLE_TECNICO"}
-                  </div>
-                </Link>
+                <MissionDossier key={item.id} project={item} index={i} />
               ))}
             </div>
           </div>

@@ -28,7 +28,6 @@ export default function Navbar() {
         >
           {lang.toUpperCase()}
         </button>
-        <span className="mono" style={{ color: "var(--primary)", fontSize: "0.6rem" }}>STATUS: ONLINE</span>
         <a href="https://github.com/mateococa" target="_blank" className="btn-modern" style={{ padding: "0.4rem 1rem", fontSize: "0.7rem", textDecoration: "none" }}>
           {t.nav.src}
         </a>

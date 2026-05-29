@@ -4,7 +4,7 @@ export const translations = {
       projects: "Projects",
       services: "Services",
       contact: "Contact",
-      src: "SRC_CODE",
+      src: "GitHub",
       back: "BACK_TO_COMMAND_CENTER",
     },
     hero: {
@@ -111,13 +111,38 @@ export const translations = {
       desc: "I’m open to discussing new systems, technical challenges, or remote opportunities.",
       email: "INIT_MAIL",
     },
+    about: {
+      tag: "BIOMETRIC.BIO",
+      title: "About the",
+      titleAccent: "Analyst.",
+      desc: "I specialize in transforming operational chaos into structured, high-performance software. My background as a Systems Analyst allows me to look beyond the code and understand the business flow, ensuring that every integration serves a strategic purpose. I don't just build apps; I build engines that power business growth.",
+    },
+    skills: {
+      tag: "SYSTEM.SPECS",
+      title: "Technical",
+      titleAccent: "Stack.",
+      categories: [
+        {
+          name: "BACKEND_CORE",
+          items: ["Django", "FastAPI", "Fastify", "PostgreSQL", "SQLModel", "Prisma"]
+        },
+        {
+          name: "FRONTEND_MOBILE",
+          items: ["Flutter", "Next.js", "React", "HTMX", "TailwindCSS", "Framer Motion"]
+        },
+        {
+          name: "OPERATIONAL_TOOLS",
+          items: ["Git/GitHub", "Docker", "Railway/Vercel", "Excel Automation", "API Auditing"]
+        }
+      ]
+    }
   },
   es: {
     nav: {
       projects: "Proyectos",
       services: "Servicios",
       contact: "Contacto",
-      src: "CODIGO_FUERTE",
+      src: "GitHub",
       back: "VOLVER_AL_CENTRO_DE_MANDO",
     },
     hero: {
@@ -224,5 +249,30 @@ export const translations = {
       desc: "Estoy abierto a discutir nuevos sistemas, desafíos técnicos u oportunidades remotas.",
       email: "ENVIAR_MAIL",
     },
+    about: {
+      tag: "BIO.BIOMETRICA",
+      title: "Sobre el",
+      titleAccent: "Analista.",
+      desc: "Me especializo en transformar el caos operativo en software estructurado y de alto rendimiento. Mi formación como Analista de Sistemas me permite ver más allá del código y entender el flujo del negocio, asegurando que cada integración cumpla un propósito estratégico. No solo construyo aplicaciones; construyo motores que impulsan el crecimiento empresarial.",
+    },
+    skills: {
+      tag: "SPECS.DEL_SISTEMA",
+      title: "Stack",
+      titleAccent: "Técnico.",
+      categories: [
+        {
+          name: "CORE_BACKEND",
+          items: ["Django", "FastAPI", "Fastify", "PostgreSQL", "SQLModel", "Prisma"]
+        },
+        {
+          name: "FRONTEND_MOBILE",
+          items: ["Flutter", "Next.js", "React", "HTMX", "TailwindCSS", "Framer Motion"]
+        },
+        {
+          name: "HERRAMIENTAS_OPS",
+          items: ["Git/GitHub", "Docker", "Railway/Vercel", "Automatización Excel", "Auditoría de APIs"]
+        }
+      ]
+    }
   },
 };

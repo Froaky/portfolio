@@ -3,193 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mateo Nahuel Coca - CV</title>
+<title>Mateo Nahuel Coca - Web Developer CV</title>
 <style>
   @font-face {
-    font-family: 'Space Grotesk';
-    src: url('./fonts/space-grotesk-latin.woff2') format('woff2');
+    font-family: "Space Grotesk";
+    src: url("../fonts/space-grotesk-latin.woff2") format("woff2");
     font-weight: 300 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: 'Space Grotesk';
-    src: url('./fonts/space-grotesk-latin-ext.woff2') format('woff2');
-    font-weight: 300 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'DM Sans';
-    src: url('./fonts/dm-sans-latin.woff2') format('woff2');
+    font-family: "DM Sans";
+    src: url("../fonts/dm-sans-latin.woff2") format("woff2");
     font-weight: 100 1000;
     font-style: normal;
     font-display: swap;
   }
-  @font-face {
-    font-family: 'DM Sans';
-    src: url('./fonts/dm-sans-latin-ext.woff2') format('woff2');
-    font-weight: 100 1000;
-    font-style: normal;
-    font-display: swap;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { font-family: 'DM Sans', sans-serif; font-size: 11px; line-height: 1.5; color: #1a1a2e; background: #ffffff; }
-  .page { width: 100%; max-width: 210mm; margin: 0 auto; padding: 2px 0; }
-  .header { margin-bottom: 20px; }
-  .header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: #1a1a2e; letter-spacing: -0.02em; margin-bottom: 6px; line-height: 1.1; }
-  .header-gradient { height: 2px; background: linear-gradient(to right, hsl(187, 74%, 32%), hsl(270, 70%, 45%)); border-radius: 1px; margin-bottom: 10px; }
-  .contact-row { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 10.5px; line-height: 1.4; color: #555; }
-  .section { margin-bottom: 18px; }
-  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: hsl(187, 74%, 32%); border-bottom: 1.5px solid #e2e2e2; padding-bottom: 4px; margin-bottom: 10px; line-height: 1.2; }
-  .summary-text { font-size: 11px; line-height: 1.7; color: #2f2f2f; }
-  .competencies-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-  .competency-tag { font-size: 10px; font-weight: 500; color: hsl(187, 74%, 28%); background: hsl(187, 40%, 95%); padding: 4px 10px; border-radius: 3px; border: 1px solid hsl(187, 40%, 88%); }
-  .job { margin-bottom: 14px; break-inside: avoid; }
-  .job-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 4px; }
-  .job-company { font-family: 'Space Grotesk', sans-serif; font-size: 12.5px; font-weight: 600; color: hsl(270, 70%, 45%); }
-  .job-period { font-size: 10.5px; color: #777; white-space: nowrap; }
-  .job-role { font-size: 11px; font-weight: 600; color: #333; margin-bottom: 6px; }
-  .job ul { padding-left: 18px; margin-top: 6px; }
-  .job li { font-size: 10.5px; line-height: 1.6; color: #333; margin-bottom: 4px; }
-  .project { margin-bottom: 12px; break-inside: avoid; }
-  .project-title { font-family: 'Space Grotesk', sans-serif; font-size: 11.5px; font-weight: 600; color: hsl(270, 70%, 45%); }
-  .project-badge { font-size: 9px; font-weight: 500; color: hsl(187, 74%, 32%); background: hsl(187, 40%, 95%); padding: 1px 6px; border-radius: 2px; margin-left: 6px; }
-  .project-desc, .project-tech, .edu-desc, .skill-item { font-size: 10.5px; color: #444; }
-  .project-tech { font-size: 9.5px; color: #888; margin-top: 3px; }
-  .edu-item { margin-bottom: 8px; break-inside: avoid; }
-  .edu-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  .edu-title { font-weight: 600; font-size: 11px; color: #333; }
-  .edu-org { color: hsl(270, 70%, 45%); font-weight: 500; }
-  .edu-year { font-size: 10px; color: #777; white-space: nowrap; }
-  .skills-grid { display: flex; flex-wrap: wrap; gap: 6px 14px; }
-  .skill-category { font-weight: 600; color: #333; font-size: 10.5px; }
+  body {
+    font-family: "DM Sans", Arial, sans-serif;
+    color: #1f2933;
+    background: #ffffff;
+    font-size: 10.4px;
+    line-height: 1.42;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 13mm 14mm;
+    background: #ffffff;
+  }
+  .header {
+    border-bottom: 2px solid #0f766e;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    font-size: 25px;
+    line-height: 1.05;
+    color: #111827;
+    margin-bottom: 4px;
+    letter-spacing: 0;
+  }
+  .headline {
+    font-size: 12.2px;
+    font-weight: 700;
+    color: #0f766e;
+    margin-bottom: 5px;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 9px;
+    color: #4b5563;
+    font-size: 9.1px;
+  }
+  a { color: #4b5563; text-decoration: none; white-space: nowrap; }
+  .section { margin-bottom: 8.5px; }
+  .section-title {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    font-size: 10.8px;
+    text-transform: uppercase;
+    color: #0f766e;
+    border-bottom: 1px solid #d7dee6;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    letter-spacing: .04em;
+    font-weight: 700;
+  }
+  p { color: #27313f; margin-bottom: 4px; }
+  ul { padding-left: 15px; }
+  li { margin-bottom: 1.8px; color: #27313f; }
+  strong { color: #111827; }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .tag {
+    border: 1px solid #bfe8e2;
+    background: #effaf8;
+    color: #115e59;
+    border-radius: 3px;
+    padding: 1.5px 5px;
+    font-size: 8.9px;
+    font-weight: 600;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px 13px;
+  }
+  .skill-block h3,
+  .project h3 {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    color: #111827;
+    font-size: 10.2px;
+    margin-bottom: 2px;
+  }
+  .job { margin-bottom: 8px; break-inside: avoid; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+  .role {
+    font-family: "Space Grotesk", Arial, sans-serif;
+    font-weight: 700;
+    color: #111827;
+    font-size: 11px;
+  }
+  .date {
+    color: #6b7280;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 12px;
+  }
+  .tech-grid p { margin-bottom: 2px; color: #27313f; }
+  .edu-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .edu-title { font-weight: 700; color: #111827; }
+  .edu-meta { color: #4b5563; text-align: right; }
+  .langs { display: flex; gap: 14px; flex-wrap: wrap; color: #27313f; }
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #ffffff; }
+    .page { margin: 0; box-shadow: none; }
+    .section, .job, .skill-block, .project { break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="header">
+<main class="page">
+  <header class="header">
     <h1>Mateo Nahuel Coca</h1>
-    <div class="header-gradient"></div>
-    <div class="contact-row">
-      <span>+54 9 387 553-9435</span>
-      <span>mateococa.job@gmail.com</span>
+    <div class="headline">Web Developer | Fullstack Developer | Backend Developer | Systems Analyst</div>
+    <div class="contact">
       <span>Salta, Argentina</span>
-      <span>Remote worldwide</span>
+      <span>Remote</span>
+      <span>mateococa.job@gmail.com</span>
+      <span>+54 9 387 553-9435</span>
+      <a href="https://www.froaky.com/">Portfolio</a>
+      <a href="https://github.com/Froaky">GitHub</a>
+      <a href="https://www.linkedin.com/in/tecnicosuperiormateoncoca/">LinkedIn</a>
     </div>
-  </div>
+  </header>
 
-  <div class="section">
+  <section class="section">
     <div class="section-title">Professional Summary</div>
-    <div class="summary-text">
-      Backend and fullstack developer with 4+ years of experience building web applications, APIs, SQL-backed systems, ERP/Odoo customizations, and internal business tools. Strong background in Node.js, JavaScript, Python, PHP, PostgreSQL/MySQL, systems integration, and process automation. Comfortable owning work end to end across backend logic, database design, frontend implementation, debugging, documentation, and cross-functional delivery in remote-friendly environments.
-    </div>
-  </div>
+    <p>Software developer with 4+ years of experience building web applications, internal business systems, APIs, integrations, SQL databases, ERP/Odoo modules, and mobile solutions connected to real operational workflows. My profile combines fullstack development, backend engineering, systems analysis, and the ability to understand business needs and turn them into useful, maintainable software.</p>
+    <p>I work across the full delivery cycle: requirements gathering, functional analysis, data design, frontend/backend development, system integration, testing, documentation, user support, maintenance, and continuous improvement.</p>
+  </section>
 
-  <div class="section">
+  <section class="section">
+    <div class="section-title">Key Skills</div>
+    <div class="tags">
+      <span class="tag">Web Development</span>
+      <span class="tag">Fullstack</span>
+      <span class="tag">Backend</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Node.js</span>
+      <span class="tag">Python</span>
+      <span class="tag">PHP</span>
+      <span class="tag">SQL</span>
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Odoo ERP</span>
+      <span class="tag">Flutter</span>
+      <span class="tag">Git</span>
+      <span class="tag">Systems Analysis</span>
+      <span class="tag">Automation</span>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="section-title">Core Competencies</div>
-    <div class="competencies-grid">
-      <span class="competency-tag">Backend Development</span>
-      <span class="competency-tag">Fullstack Delivery</span>
-      <span class="competency-tag">API Integrations</span>
-      <span class="competency-tag">PostgreSQL / MySQL</span>
-      <span class="competency-tag">Odoo ERP Customization</span>
-      <span class="competency-tag">Business Process Automation</span>
-      <span class="competency-tag">Node.js / Python / PHP</span>
-      <span class="competency-tag">Systems Analysis</span>
+    <div class="two-col">
+      <div class="skill-block">
+        <h3>Web and fullstack development</h3>
+        <ul>
+          <li>Complete web applications with frontend, backend, and databases.</li>
+          <li>Responsive interfaces with HTML, CSS, JavaScript, and Bootstrap.</li>
+          <li>Features for users, internal processes, and daily operations.</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>Backend, APIs, and data</h3>
+        <ul>
+          <li>Business logic, services, REST APIs, and system integrations.</li>
+          <li>Work with Node.js, Python, PHP, SQL, PostgreSQL, and MySQL.</li>
+          <li>Database design, queries, maintenance, and improvement.</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>ERP, Odoo, and integrations</h3>
+        <ul>
+          <li>Odoo ERP customization with Python and XML.</li>
+          <li>Automation of administrative and operational processes.</li>
+          <li>Odoo integration with APIs, devices, and external applications.</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h3>Analysis and quality</h3>
+        <ul>
+          <li>Requirements gathering, documentation, and user support.</li>
+          <li>Scrum, Kanban, Git, code review, Clean Code, SOLID, and OOP.</li>
+          <li>AI-assisted development for coding, debugging, and documentation.</li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
+  <section class="section">
     <div class="section-title">Work Experience</div>
-
     <div class="job">
-      <div class="job-header">
-        <div class="job-company">BMI Constructora</div>
-        <div class="job-period">Feb 2024 - Present</div>
+      <div class="job-head">
+        <div class="role">Fullstack Developer - BMI Constructora</div>
+        <div class="date">February 2024 - Present</div>
       </div>
-      <div class="job-role">Fullstack Developer</div>
       <ul>
-        <li>Implemented and customized Odoo ERP modules in Python and XML to support internal operations and business-specific workflows.</li>
-        <li>Built and maintained integration APIs connecting Odoo with facial scanning devices and a custom mobile application.</li>
-        <li>Designed and developed a company mobile app for resource management and cross-team coordination, integrated with Odoo through a custom API.</li>
-        <li>Developed internal web applications and responsive interfaces using JavaScript, HTML, CSS, and Bootstrap.</li>
-        <li>Contributed to SQL database design, maintenance, and data-related application logic.</li>
-        <li>Automated administrative processes and improved operational workflows for internal users.</li>
-        <li>Collaborated with cross-functional teams in agile environments using Scrum and Kanban.</li>
-        <li>Participated in code reviews focused on maintainability, Clean Code, SOLID, and long-term quality.</li>
+        <li>Develop, maintain, and integrate internal solutions for operations, resource management, projects, and administration.</li>
+        <li>Implement and customize Odoo ERP modules using Python and XML, adapting workflows to specific business needs.</li>
+        <li>Build APIs to connect Odoo with facial recognition devices and an internal mobile application.</li>
+        <li>Designed and developed a corporate mobile app for resource management and team coordination, integrated with Odoo through a custom API.</li>
+        <li>Develop internal web applications and responsive interfaces using JavaScript, HTML, CSS, and Bootstrap.</li>
+        <li>Work with SQL databases connected to business systems, including queries, maintenance, data structures, and reporting support.</li>
+        <li>Automate administrative and operational processes to reduce manual work and improve traceability.</li>
+        <li>Gather user needs, translate requirements into features, document workflows, and fix issues in internal systems.</li>
       </ul>
     </div>
-
     <div class="job">
-      <div class="job-header">
-        <div class="job-company">Freelance</div>
-        <div class="job-period">Jan 2022 - Present</div>
+      <div class="job-head">
+        <div class="role">Freelance Software Developer</div>
+        <div class="date">January 2022 - Present</div>
       </div>
-      <div class="job-role">Software Developer</div>
       <ul>
-        <li>Built and maintained custom web solutions using HTML, CSS, JavaScript, PHP, Python, and SQL-backed architectures.</li>
-        <li>Resolved production issues, improved performance, and supported ongoing backend and product enhancements.</li>
-        <li>Configured servers and databases and supported deployment, maintenance, and operational continuity tasks.</li>
-        <li>Wrote technical documentation and product manuals for delivered solutions.</li>
-        <li>Gathered customer feedback, translated it into technical improvements, and validated changes before release.</li>
+        <li>Develop and maintain custom web solutions for clients, combining frontend, backend, and databases.</li>
+        <li>Build features with HTML, CSS, JavaScript, PHP, Python, Node.js, and SQL according to project needs.</li>
+        <li>Gather requirements, propose practical technical solutions, and support the full delivery cycle.</li>
+        <li>Deliver improvements, bug fixes, post-delivery support, and adjustments based on user feedback.</li>
+        <li>Configure basic server environments, databases, and deployments to keep applications running in production.</li>
+        <li>Create technical documentation, product manuals, and usage guides to support solution adoption.</li>
       </ul>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Selected Projects</div>
-    <div class="project">
-      <div class="project-title">Odoo Integration Platform <span class="project-badge">Production</span></div>
-      <div class="project-desc">Developed custom integrations between Odoo, facial scanning devices, and a mobile app to support business operations and cross-system workflows.</div>
-      <div class="project-tech">Python, APIs, Odoo, SQL</div>
+  <section class="section">
+    <div class="section-title">Featured Projects</div>
+    <div class="two-col">
+      <div class="project">
+        <h3>Mobile Resource Management System</h3>
+        <p>Internal mobile app integrated with Odoo for resource coordination, task tracking, and operational data synchronization.</p>
+        <p><strong>Stack:</strong> Flutter, REST API, Odoo, PostgreSQL</p>
+      </div>
+      <div class="project">
+        <h3>Odoo Integration Suite</h3>
+        <p>Odoo modules and customizations for operations, inventory, HR, and project management, with external integrations.</p>
+        <p><strong>Stack:</strong> Python, XML, Odoo, SQL, APIs</p>
+      </div>
+      <div class="project">
+        <h3>Business Web Applications</h3>
+        <p>Complete web solutions for clients and internal teams: interfaces, backend, databases, documentation, support, and maintenance.</p>
+        <p><strong>Stack:</strong> JavaScript, Node.js, Python, PHP, PostgreSQL, MySQL</p>
+      </div>
+      <div class="project">
+        <h3>Process Automation</h3>
+        <p>Administrative and operational workflows automated to reduce manual work, improve traceability, and organize management data.</p>
+        <p><strong>Stack:</strong> Odoo, SQL, APIs, advanced Excel</p>
+      </div>
     </div>
-    <div class="project">
-      <div class="project-title">Internal Resource Management App <span class="project-badge">Mobile</span></div>
-      <div class="project-desc">Designed and built a Flutter-based internal mobile application connected to company systems through a custom API.</div>
-      <div class="project-tech">Flutter, API Integration, Odoo</div>
-    </div>
-    <div class="project">
-      <div class="project-title">Freelance Business Software Solutions <span class="project-badge">Client Work</span></div>
-      <div class="project-desc">Delivered backend and fullstack solutions, maintenance, and database support for practical business requirements.</div>
-      <div class="project-tech">Node.js, JavaScript, PHP, Python, PostgreSQL, MySQL</div>
-    </div>
-  </div>
+  </section>
 
-  <div class="section">
+  <section class="section">
+    <div class="section-title">Technologies</div>
+    <div class="tech-grid">
+      <p><strong>Languages:</strong> JavaScript, Python, PHP, SQL, HTML, CSS, XML</p>
+      <p><strong>Backend:</strong> Node.js, Flask, Laravel, REST APIs, business logic</p>
+      <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Bootstrap, responsive design</p>
+      <p><strong>Databases:</strong> PostgreSQL, MySQL, schema design, queries</p>
+      <p><strong>ERP/Mobile:</strong> Odoo, Python/XML, Flutter, mobile-backend integration</p>
+      <p><strong>Tools:</strong> Git, GitHub, Linux, advanced Excel, ChatGPT, Claude, Copilot, Cursor</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="section-title">Education</div>
     <div class="edu-item">
-      <div class="edu-header">
-        <div class="edu-title">Bachelor's Degree in Technology Resource Management <span class="edu-org">Universidad Gaston Dachary</span></div>
-        <div class="edu-year">2026 (in progress)</div>
+      <div>
+        <div class="edu-title">Bachelor's Degree in Technology Resource Management</div>
+        <div class="edu-meta">Universidad Gaston Dachary</div>
       </div>
+      <div class="edu-meta">In progress, June 2026</div>
     </div>
     <div class="edu-item">
-      <div class="edu-header">
-        <div class="edu-title">Higher Technician in Information Systems Analysis <span class="edu-org">Instituto Superior del Milagro</span></div>
-        <div class="edu-year">2021</div>
+      <div>
+        <div class="edu-title">Advanced Technical Diploma in Information Systems Analysis</div>
+        <div class="edu-meta">Instituto Superior del Milagro</div>
       </div>
+      <div class="edu-meta">Completed in 2021</div>
     </div>
     <div class="edu-item">
-      <div class="edu-header">
-        <div class="edu-title">Programming Analyst Technician <span class="edu-org">Instituto Superior del Milagro</span></div>
-        <div class="edu-year">2021</div>
+      <div>
+        <div class="edu-title">Technical Programming Analyst Diploma</div>
+        <div class="edu-meta">Instituto Superior del Milagro</div>
       </div>
+      <div class="edu-meta">Completed in 2021</div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Skills</div>
-    <div class="skills-grid">
-      <div class="skill-item"><span class="skill-category">Backend:</span> Node.js, Python, PHP, SQL, PostgreSQL, MySQL, API integrations</div>
-      <div class="skill-item"><span class="skill-category">Frontend:</span> JavaScript, HTML, CSS, Bootstrap</div>
-      <div class="skill-item"><span class="skill-category">ERP / Systems:</span> Odoo, XML, systems analysis, business process automation</div>
-      <div class="skill-item"><span class="skill-category">Mobile:</span> Flutter</div>
-      <div class="skill-item"><span class="skill-category">Tools:</span> Git, Flask, Laravel</div>
-      <div class="skill-item"><span class="skill-category">Languages:</span> Spanish (native), English (Intermediate), Portuguese (A2)</div>
+  <section class="section">
+    <div class="section-title">Languages</div>
+    <div class="langs">
+      <span><strong>Spanish:</strong> native</span>
+      <span><strong>English:</strong> intermediate, technical reading and writing</span>
+      <span><strong>Portuguese:</strong> A2</span>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 </body>
 </html>
