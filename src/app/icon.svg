@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Froaky: ranita con la paleta del sitio -->
+  <rect width="64" height="64" rx="14" fill="#09090b"/>
+  <!-- cabeza -->
+  <ellipse cx="32" cy="41" rx="23" ry="17" fill="#34d399"/>
+  <!-- bultos de los ojos -->
+  <circle cx="19" cy="23" r="10" fill="#34d399"/>
+  <circle cx="45" cy="23" r="10" fill="#34d399"/>
+  <!-- ojos -->
+  <circle cx="19" cy="23" r="6" fill="#fafafa"/>
+  <circle cx="45" cy="23" r="6" fill="#fafafa"/>
+  <circle cx="20.5" cy="24" r="3" fill="#09090b"/>
+  <circle cx="43.5" cy="24" r="3" fill="#09090b"/>
+  <!-- fosas nasales -->
+  <circle cx="27" cy="36" r="1.4" fill="#09090b" opacity="0.55"/>
+  <circle cx="37" cy="36" r="1.4" fill="#09090b" opacity="0.55"/>
+  <!-- sonrisa -->
+  <path d="M20 44 Q32 52 44 44" stroke="#09090b" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+</svg>

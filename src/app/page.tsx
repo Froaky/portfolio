@@ -21,15 +21,27 @@ export default function Home() {
       
       <main>
         <header className="hero-modern">
-          <div className="container hero-content">
-            <TerminalHero 
-              title={t.hero.title}
-              subtitle={t.hero.titleAccent}
-              desc={t.hero.desc}
-            />
-            <div style={{ position: "relative" }}>
-              <InteractiveProfile src="/mateo.jpg" />
+          <div className="container">
+            <div className="hero-content">
+              <TerminalHero
+                title={t.hero.title}
+                subtitle={t.hero.titleAccent}
+                desc={t.hero.desc}
+              />
+              <div style={{ position: "relative" }}>
+                <InteractiveProfile src="/mateo.jpg" />
+              </div>
             </div>
+
+            {/* Resultados reales, verificables en los proyectos de abajo */}
+            <Reveal delay={0.3} className="hero-results">
+              {t.hero.results.map((result) => (
+                <div key={result.label} className="hero-result">
+                  <div className="hero-result-value">{result.value}</div>
+                  <div className="hero-result-label">{result.label}</div>
+                </div>
+              ))}
+            </Reveal>
           </div>
         </header>
 
@@ -69,6 +81,28 @@ export default function Home() {
                   <div className="hud-line" style={{ width: "40%", opacity: 0.3, transform: "translateZ(15px)" }} />
                   <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)", transform: "translateZ(25px)" }}>{item.desc}</p>
                 </TiltCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="process" style={{ borderTop: "1px solid var(--border)" }}>
+          <div className="container">
+            <Reveal>
+              <div className="section-tag">{t.process.tag}</div>
+              <h2 style={{ fontSize: "2.5rem", marginBottom: "4rem", textTransform: "uppercase" }}>
+                {t.process.title} <span className="text-gradient">{t.process.titleAccent}</span>
+              </h2>
+            </Reveal>
+            <div className="process-grid">
+              {t.process.steps.map((step, i) => (
+                <Reveal key={step.num} delay={i * 0.08}>
+                  <div className="process-step" style={{ height: "100%" }}>
+                    <div className="process-step-num">[{step.num}]</div>
+                    <div className="process-step-name">{step.name}</div>
+                    <div className="process-step-desc">{step.desc}</div>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
