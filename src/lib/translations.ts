@@ -16,6 +16,39 @@ export const translations = {
       getResume: "GET_RESUME",
       cvPath: "/docs/cv-en.pdf",
       cvHtmlPath: "/docs/cv-en.html",
+      available: "AVAILABLE // REMOTE",
+      results: [
+        { value: "4h → 5min", label: "Daily manual sync (Odoo Hub)" },
+        { value: "100%", label: "Spreadsheets replaced (Gerayse)" },
+        { value: "4", label: "Systems in production" },
+      ],
+    },
+    process: {
+      tag: "PROCESS.PIPELINE",
+      title: "How I",
+      titleAccent: "Work.",
+      steps: [
+        {
+          num: "01",
+          name: "ANALYZE",
+          desc: "Map the real process first — data flows, roles and bottlenecks — before writing a single line of code.",
+        },
+        {
+          num: "02",
+          name: "MODEL",
+          desc: "Turn business rules into explicit models: state machines, SQL schemas, permission levels.",
+        },
+        {
+          num: "03",
+          name: "BUILD",
+          desc: "APIs and internal tools on a pragmatic stack, built to be maintained by whoever comes next.",
+        },
+        {
+          num: "04",
+          name: "OPERATE",
+          desc: "Deploy, monitor and iterate with the team until the process runs on its own.",
+        },
+      ],
     },
     capabilities: {
       tag: "CAPABILITIES.MANIFEST",
@@ -238,6 +271,39 @@ export const translations = {
       getResume: "DESCARGAR_CV",
       cvPath: "/docs/cv-es.pdf",
       cvHtmlPath: "/docs/cv-es.html",
+      available: "DISPONIBLE // REMOTO",
+      results: [
+        { value: "4h → 5min", label: "Sincronización manual diaria (Odoo Hub)" },
+        { value: "100%", label: "Planillas reemplazadas (Gerayse)" },
+        { value: "4", label: "Sistemas en producción" },
+      ],
+    },
+    process: {
+      tag: "PROCESO.PIPELINE",
+      title: "Cómo",
+      titleAccent: "Trabajo.",
+      steps: [
+        {
+          num: "01",
+          name: "ANALIZAR",
+          desc: "Primero mapeo el proceso real — flujos de datos, roles y cuellos de botella — antes de escribir una sola línea de código.",
+        },
+        {
+          num: "02",
+          name: "MODELAR",
+          desc: "Convierto las reglas de negocio en modelos explícitos: máquinas de estado, esquemas SQL, niveles de permiso.",
+        },
+        {
+          num: "03",
+          name: "CONSTRUIR",
+          desc: "APIs y herramientas internas con un stack pragmático, hechas para que las mantenga el que venga después.",
+        },
+        {
+          num: "04",
+          name: "OPERAR",
+          desc: "Despliegue, monitoreo e iteración con el equipo hasta que el proceso funcione solo.",
+        },
+      ],
     },
     capabilities: {
       tag: "CAPACIDADES.MANIFIESTO",

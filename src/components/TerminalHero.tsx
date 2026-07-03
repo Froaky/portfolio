@@ -111,17 +111,21 @@ export default function TerminalHero({ title, subtitle, desc }: TerminalHeroProp
         </p>
       </motion.div>
 
-      {/* Minimalistic Stack & Location Badges */}
-      <motion.div 
+      {/* Minimalistic Availability, Stack & Location Badges */}
+      <motion.div
         variants={itemVariants}
         className="mt-10 flex flex-wrap gap-3"
       >
+        <div className="px-3 py-1 rounded-[4px] flex items-center gap-2" style={{ border: '1px solid rgba(16, 185, 129, 0.35)', background: 'rgba(16, 185, 129, 0.06)' }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot" />
+          <span className="mono text-[0.6rem] uppercase tracking-wide" style={{ color: '#34d399' }}>{t.hero.available}</span>
+        </div>
         <div className="px-3 py-1 border border-[var(--border)] rounded-[4px] flex items-center gap-2 bg-[rgba(255,255,255,0.015)]">
           <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
           <span className="mono text-[0.6rem] uppercase tracking-wide text-zinc-300">Full-Stack Dev</span>
         </div>
         <div className="px-3 py-1 border border-[var(--border)] rounded-[4px] flex items-center gap-2 bg-[rgba(255,255,255,0.015)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
           <span className="mono text-[0.6rem] uppercase tracking-wide text-zinc-300">Salta, Argentina</span>
         </div>
       </motion.div>

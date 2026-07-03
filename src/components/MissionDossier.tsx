@@ -6,11 +6,20 @@ import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 import SystemArchitecture from './SystemArchitecture';
+import BrowserFrame from './BrowserFrame';
 
 interface Decision {
   problem: string;
   decision: string;
 }
+
+// Capturas reales de cada sistema (tomadas de los deploys en producción / demo local)
+const SCREENSHOTS: Record<string, { src: string; domain: string }> = {
+  'salta-rubik': { src: '/screenshots/salta-rubik.png', domain: 'timer-salta-rubik-production.up.railway.app' },
+  'gerayse': { src: '/screenshots/gerayse.png', domain: 'gerayse10-production.up.railway.app' },
+  'kinnikuapp': { src: '/screenshots/kinnikuapp.png', domain: 'kinnikuapp.com' },
+  'opsflow': { src: '/screenshots/opsflow.png', domain: 'internal://opsflow — live demo' },
+};
 
 interface Project {
   id: string;
@@ -31,6 +40,8 @@ export default function MissionDossier({ project, index }: { project: Project, i
 
   const isEn = lang === 'en';
   const isInternalLink = project.link.startsWith('/');
+  const screenshot = SCREENSHOTS[project.id];
+  const [faceView, setFaceView] = useState<'preview' | 'diagram'>(screenshot ? 'preview' : 'diagram');
 
   return (
     <motion.div 
@@ -125,29 +136,55 @@ export default function MissionDossier({ project, index }: { project: Project, i
             transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"
           }}>
             
-            {/* CARA A: Diagrama de Arquitectura (Original) */}
+            {/* CARA A: Captura real del producto o diagrama de arquitectura */}
             <div style={{
               position: "absolute",
               inset: 0,
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
               transform: "rotateY(0deg)",
-              background: "rgba(255,255,255,0.005)", 
-              border: "1px solid var(--border)", 
-              borderRadius: "12px", 
+              background: "rgba(255,255,255,0.005)",
+              border: "1px solid var(--border)",
+              borderRadius: "12px",
               overflow: "hidden",
               display: "flex",
               alignItems: "center",
               justifyContent: "center"
             }}>
-              <div style={{ 
-                position: "absolute", 
-                inset: 0, 
-                background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.01) 0%, transparent 70%)" 
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.01) 0%, transparent 70%)"
               }} />
-              <div style={{ width: "100%", height: "100%", padding: "1.25rem" }}>
-                <SystemArchitecture id={project.id} />
-              </div>
+
+              {screenshot && (
+                <div className="dossier-view-toggle">
+                  <button
+                    className={faceView === 'preview' ? 'active' : ''}
+                    onClick={() => setFaceView('preview')}
+                  >
+                    {isEn ? 'PREVIEW' : 'VISTA'}
+                  </button>
+                  <button
+                    className={faceView === 'diagram' ? 'active' : ''}
+                    onClick={() => setFaceView('diagram')}
+                  >
+                    {isEn ? 'DIAGRAM' : 'DIAGRAMA'}
+                  </button>
+                </div>
+              )}
+
+              {screenshot && faceView === 'preview' ? (
+                <BrowserFrame
+                  src={screenshot.src}
+                  alt={`${project.title} — ${isEn ? 'real product screenshot' : 'captura real del producto'}`}
+                  domain={screenshot.domain}
+                />
+              ) : (
+                <div style={{ width: "100%", height: "100%", padding: "1.25rem" }}>
+                  <SystemArchitecture id={project.id} />
+                </div>
+              )}
             </div>
 
             {/* CARA B: Decisiones de ingeniería reales del proyecto */}
