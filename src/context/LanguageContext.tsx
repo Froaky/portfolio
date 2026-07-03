@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useSyncExternalStore } from 'react';
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from 'react';
 
 type Language = 'en' | 'es';
 const DEFAULT_LANGUAGE: Language = 'en';
@@ -37,6 +37,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     getStoredLanguage,
     () => DEFAULT_LANGUAGE
   );
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const toggleLang = () => {
     const newLang = lang === 'en' ? 'es' : 'en';

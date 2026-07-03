@@ -137,6 +137,38 @@ export default function ProjectDetail() {
               </div>
             </div>
 
+            {/* Engineering Decisions */}
+            <div style={{ marginBottom: '3.5rem' }}>
+              <div className="mono" style={{
+                fontSize: '0.65rem',
+                color: 'var(--accent)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                marginBottom: '1.5rem'
+              }}>
+                {t.labels.decisions}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                {project.decisions.map((d, i) => (
+                  <div key={i} style={{
+                    padding: '1.25rem 1.5rem',
+                    background: 'rgba(255,255,255,0.01)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '8px',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', marginBottom: '0.4rem' }}>
+                      <span className="mono" style={{ fontSize: '0.55rem', color: 'var(--text-muted)', flexShrink: 0 }}>{t.labels.problem} ▸</span>
+                      <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>{d.problem}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem' }}>
+                      <span className="mono" style={{ fontSize: '0.55rem', color: 'var(--accent)', flexShrink: 0 }}>{t.labels.decision} ▸</span>
+                      <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.88)', lineHeight: 1.5 }}>{d.decision}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Challenge & Impact */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '3rem' }}>
               <div style={{ paddingLeft: '1.25rem', borderLeft: '1.5px solid var(--accent)' }}>
@@ -155,15 +187,25 @@ export default function ProjectDetail() {
 
             {/* CTA */}
             {project.link !== '#' && (
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-modern btn-primary-modern"
-                style={{ display: 'inline-flex', fontSize: '0.85rem' }}
-              >
-                {isEn ? 'Visit Live Site →' : 'Visitar Sitio →'}
-              </a>
+              project.link.startsWith('/') ? (
+                <Link
+                  href={project.link}
+                  className="btn-modern btn-primary-modern"
+                  style={{ display: 'inline-flex', fontSize: '0.85rem' }}
+                >
+                  {isEn ? 'Open Interactive Demo →' : 'Abrir Demo Interactivo →'}
+                </Link>
+              ) : (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-modern btn-primary-modern"
+                  style={{ display: 'inline-flex', fontSize: '0.85rem' }}
+                >
+                  {isEn ? 'Visit Live Site →' : 'Visitar Sitio →'}
+                </a>
+              )
             )}
           </div>
 
@@ -182,20 +224,26 @@ export default function ProjectDetail() {
               background: 'rgba(255,255,255,0.01)'
             }}>
               <div className="mono" style={{ fontSize: '0.6rem', color: 'var(--text-muted)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                {isEn ? 'PROJECT METRICS' : 'MÉTRICAS'}
+                {isEn ? 'PROJECT FILE' : 'FICHA DEL PROYECTO'}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Status</span>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: '#10b981' }}>Operational</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: '#10b981' }}>
+                    {project.link.startsWith('http')
+                      ? (isEn ? 'In production' : 'En producción')
+                      : project.link.startsWith('/')
+                        ? (isEn ? 'Interactive demo' : 'Demo interactivo')
+                        : (isEn ? 'Internal system' : 'Sistema interno')}
+                  </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Security</span>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>AES-256</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Core stack</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>{project.tech.slice(0, 2).join(' + ')}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Uptime</span>
-                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>99.98%</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{isEn ? 'Decisions' : 'Decisiones'}</span>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--foreground)' }}>{project.decisions.length} {isEn ? 'documented' : 'documentadas'}</span>
                 </div>
               </div>
             </div>
