@@ -64,6 +64,20 @@ export const translations = {
           features: ["Official WCA Scramble Engine", "Cross-device Solve Synchronization", "Advanced Statistics & Trend Analysis", "Customizable Inspection Timing"],
           tech: ["Flutter", "Fastify", "Prisma", "PostgreSQL"],
           link: "https://timer-salta-rubik-production.up.railway.app",
+          decisions: [
+            {
+              problem: "Timing must be millisecond-precise on both web and mobile, without drifting between devices.",
+              decision: "Custom synchronization engine on Fastify + Prisma that reconciles solve history across devices.",
+            },
+            {
+              problem: "Scrambles must be valid for competition-style practice.",
+              decision: "WCA-style scramble engine instead of naive random move generation.",
+            },
+            {
+              problem: "Stats over thousands of solves get slow if computed naively.",
+              decision: "Session-based history model in PostgreSQL with precomputed trend statistics.",
+            },
+          ],
         },
         {
           id: "gerayse",
@@ -75,6 +89,20 @@ export const translations = {
           features: ["Centralized Branch Treasury", "Real-time Cashflow Auditing", "Multi-level Permission System", "Automated Daily Financial Closing"],
           tech: ["Django", "PostgreSQL", "HTMX", "Operational UI"],
           link: "https://gerayse10-production.up.railway.app",
+          decisions: [
+            {
+              problem: "Core financial operations lived in editable spreadsheets with no audit trail.",
+              decision: "Business rules modeled in Django over PostgreSQL, so every movement is validated and traceable.",
+            },
+            {
+              problem: "Multiple offices handling cash with different levels of responsibility.",
+              decision: "Centralized branch treasury with a multi-level permission system.",
+            },
+            {
+              problem: "Manual end-of-day closings were slow and error-prone.",
+              decision: "Automated daily financial closing that locks the day's ledger.",
+            },
+          ],
         },
         {
           id: "kinnikuapp",
@@ -86,6 +114,20 @@ export const translations = {
           features: ["Multi-tenant Data Isolation", "QR Attendance & Member Control", "Automated Payment Workflows", "White-label Gym Branding"],
           tech: ["FastAPI", "SQLModel", "SaaS Architecture", "QR-Core"],
           link: "https://kinnikuapp.com",
+          decisions: [
+            {
+              problem: "Many gyms on one platform — one tenant's data must never leak into another's.",
+              decision: "Strict multi-tenant isolation enforced at the data layer in FastAPI + PostgreSQL.",
+            },
+            {
+              problem: "Front-desk attendance control has to be faster than a paper list.",
+              decision: "QR check-in flow validated server-side against the member's subscription.",
+            },
+            {
+              problem: "Each gym wants the app to look like their own brand.",
+              decision: "White-label theming resolved per tenant at runtime.",
+            },
+          ],
         },
         {
           id: "opsflow",
@@ -96,13 +138,55 @@ export const translations = {
           fullDesc: "An advanced internal dashboard designed to handle complex request lifecycles. By modeling business processes as state machines, OpsFlow ensures that every transition is authorized and tracked, providing real-time visibility into operational bottlenecks.",
           features: ["State Machine Workflow Engine", "Real-time Process Monitoring", "Automated Approval Chains", "Technical HUD Dashboard"],
           tech: ["Next.js", "Server Actions", "Industrial UX"],
+          link: "/opsflow",
+          decisions: [
+            {
+              problem: "Approval chains encoded in ad-hoc conditionals become impossible to reason about.",
+              decision: "Each request lifecycle modeled as an explicit state machine — invalid transitions can't happen.",
+            },
+            {
+              problem: "Bottlenecks were invisible until someone complained.",
+              decision: "Real-time monitoring of every request's state, surfaced in a technical dashboard.",
+            },
+            {
+              problem: "Every state change needs accountability.",
+              decision: "Each transition is authorized and recorded before it's applied.",
+            },
+          ],
+        },
+        {
+          id: "odoo-integration-hub",
+          title: "ODOO INTEGRATION HUB",
+          desc: "Custom Odoo ERP modules exposing a restricted REST API that syncs field devices with the central ERP in real time.",
+          challenge: "Real-time device-to-ERP sync without breaking single-source-of-truth integrity.",
+          impact: "Manual synchronization reduced from 4 hours daily to under 5 minutes.",
+          fullDesc: "A central integration hub built inside Odoo ERP to automate business-critical operations. The organization struggled with manual data entry between field devices and the ERP, delaying inventory management and financial reporting. Custom Python modules extend Odoo's models and expose a restricted REST API for field workers, with PostgreSQL indexing optimized for high-frequency writes and webhook-based alerts for external task routing. The system handles thousands of automated status transitions per day.",
+          features: ["Custom Odoo Model Extensions (Python)", "Restricted REST API for Field Devices", "High-frequency Write Optimization (PostgreSQL)", "Webhook-based External Task Routing"],
+          tech: ["Python", "Odoo", "PostgreSQL", "REST APIs"],
           link: "#",
+          decisions: [
+            {
+              problem: "Field data was re-typed by hand into the ERP, delaying inventory and financial reporting.",
+              decision: "A restricted REST API over custom Odoo modules lets field devices sync in real time.",
+            },
+            {
+              problem: "A standalone middleware would duplicate business data outside the ERP.",
+              decision: "Built inside Odoo to keep a single source of truth, accepting the ORM's complexity under high load.",
+            },
+            {
+              problem: "High-frequency writes from field devices strained the database.",
+              decision: "PostgreSQL indexing optimized specifically for the hot write paths.",
+            },
+          ],
         },
       ],
     },
     labels: {
       challenge: "CHALLENGE",
       impact: "IMPACT (ANALYSIS)",
+      decisions: "ENGINEERING_DECISIONS",
+      problem: "PROBLEM",
+      decision: "DECISION",
     },
     contact: {
       tag: "CONTACT.CHANNELS",
@@ -202,6 +286,20 @@ export const translations = {
           features: ["Motor de Scrambles Oficiales WCA", "Sincronización entre Dispositivos", "Analítica de Estadísticas Avanzadas", "Tiempos de Inspección Personalizables"],
           tech: ["Flutter", "Fastify", "Prisma", "PostgreSQL"],
           link: "https://timer-salta-rubik-production.up.railway.app",
+          decisions: [
+            {
+              problem: "El timing debe tener precisión de milisegundos en web y mobile, sin deriva entre dispositivos.",
+              decision: "Motor de sincronización propio sobre Fastify + Prisma que reconcilia el historial de solves entre dispositivos.",
+            },
+            {
+              problem: "Los scrambles deben ser válidos para práctica estilo competencia.",
+              decision: "Motor de scrambles estilo WCA en lugar de generación aleatoria ingenua de movimientos.",
+            },
+            {
+              problem: "Las estadísticas sobre miles de solves se vuelven lentas si se calculan de forma ingenua.",
+              decision: "Modelo de historial por sesiones en PostgreSQL con estadísticas de tendencia precalculadas.",
+            },
+          ],
         },
         {
           id: "gerayse",
@@ -213,6 +311,20 @@ export const translations = {
           features: ["Tesorería Centralizada por Sucursal", "Auditoría de Flujo de Caja en Tiempo Real", "Sistema de Permisos Multinivel", "Cierre Financiero Diario Automatizado"],
           tech: ["Django", "PostgreSQL", "HTMX", "UI Operativa"],
           link: "https://gerayse10-production.up.railway.app",
+          decisions: [
+            {
+              problem: "Las operaciones financieras core vivían en planillas editables sin rastro de auditoría.",
+              decision: "Reglas de negocio modeladas en Django sobre PostgreSQL: cada movimiento se valida y queda trazado.",
+            },
+            {
+              problem: "Múltiples oficinas manejando caja con distintos niveles de responsabilidad.",
+              decision: "Tesorería centralizada por sucursal con sistema de permisos multinivel.",
+            },
+            {
+              problem: "Los cierres manuales de fin de día eran lentos y propensos a errores.",
+              decision: "Cierre financiero diario automatizado que bloquea el libro del día.",
+            },
+          ],
         },
         {
           id: "kinnikuapp",
@@ -224,6 +336,20 @@ export const translations = {
           features: ["Aislamiento de Datos Multi-tenant", "Control de Socios y Asistencia por QR", "Flujos de Pago Automatizados", "Branding Personalizado por Gimnasio"],
           tech: ["FastAPI", "SQLModel", "Arquitectura SaaS", "QR-Core"],
           link: "https://kinnikuapp.com",
+          decisions: [
+            {
+              problem: "Muchos gimnasios en una sola plataforma: los datos de un tenant jamás deben filtrarse a otro.",
+              decision: "Aislamiento multi-tenant estricto aplicado en la capa de datos con FastAPI + PostgreSQL.",
+            },
+            {
+              problem: "El control de asistencia en mostrador tiene que ser más rápido que una lista en papel.",
+              decision: "Check-in por QR validado en el servidor contra la suscripción del socio.",
+            },
+            {
+              problem: "Cada gimnasio quiere que la app se vea con su propia marca.",
+              decision: "Theming white-label resuelto por tenant en tiempo de ejecución.",
+            },
+          ],
         },
         {
           id: "opsflow",
@@ -234,13 +360,55 @@ export const translations = {
           fullDesc: "Dashboard operativo avanzado diseñado para gestionar ciclos de vida de solicitudes complejas. Al modelar los procesos como máquinas de estado, OpsFlow asegura que cada transición sea autorizada y registrada, eliminando cuellos de botella mediante visibilidad en tiempo real.",
           features: ["Motor de Workflows tipo State Machine", "Monitoreo de Procesos en Tiempo Real", "Cadenas de Aprobación Automatizadas", "Dashboard Técnico Estilo HUD"],
           tech: ["Next.js", "Server Actions", "UX Industrial"],
+          link: "/opsflow",
+          decisions: [
+            {
+              problem: "Las cadenas de aprobación codificadas en condicionales ad-hoc se vuelven imposibles de razonar.",
+              decision: "Cada ciclo de vida modelado como máquina de estados explícita: las transiciones inválidas no pueden ocurrir.",
+            },
+            {
+              problem: "Los cuellos de botella eran invisibles hasta que alguien se quejaba.",
+              decision: "Monitoreo en tiempo real del estado de cada solicitud, visible en un dashboard técnico.",
+            },
+            {
+              problem: "Cada cambio de estado necesita responsabilidad asignada.",
+              decision: "Toda transición se autoriza y se registra antes de aplicarse.",
+            },
+          ],
+        },
+        {
+          id: "odoo-integration-hub",
+          title: "ODOO INTEGRATION HUB",
+          desc: "Módulos custom de Odoo ERP que exponen una REST API restringida para sincronizar dispositivos de campo con el ERP central en tiempo real.",
+          challenge: "Sincronización dispositivo-ERP en tiempo real sin romper la integridad de fuente única de verdad.",
+          impact: "La sincronización manual bajó de 4 horas diarias a menos de 5 minutos.",
+          fullDesc: "Un hub central de integración construido dentro de Odoo ERP para automatizar operaciones críticas del negocio. La organización sufría la carga manual de datos entre dispositivos de campo y el ERP, lo que atrasaba inventario y reportes financieros. Módulos Python personalizados extienden los modelos de Odoo y exponen una REST API restringida para trabajadores de campo, con indexación de PostgreSQL optimizada para escrituras de alta frecuencia y alertas por webhook para ruteo externo de tareas. El sistema maneja miles de transiciones de estado automatizadas por día.",
+          features: ["Extensiones Custom de Modelos Odoo (Python)", "REST API Restringida para Dispositivos de Campo", "Optimización de Escrituras de Alta Frecuencia (PostgreSQL)", "Ruteo Externo de Tareas vía Webhooks"],
+          tech: ["Python", "Odoo", "PostgreSQL", "REST APIs"],
           link: "#",
+          decisions: [
+            {
+              problem: "Los datos de campo se re-tipeaban a mano en el ERP, atrasando inventario y reportes financieros.",
+              decision: "Una REST API restringida sobre módulos custom de Odoo permite a los dispositivos sincronizar en tiempo real.",
+            },
+            {
+              problem: "Un middleware separado duplicaría datos del negocio fuera del ERP.",
+              decision: "Se construyó dentro de Odoo para mantener una única fuente de verdad, aceptando la complejidad del ORM bajo alta carga.",
+            },
+            {
+              problem: "Las escrituras de alta frecuencia desde dispositivos de campo exigían a la base de datos.",
+              decision: "Indexación de PostgreSQL optimizada específicamente para las rutas calientes de escritura.",
+            },
+          ],
         },
       ],
     },
     labels: {
       challenge: "DESAFÍO",
       impact: "IMPACTO (ANÁLISIS)",
+      decisions: "DECISIONES_DE_INGENIERÍA",
+      problem: "PROBLEMA",
+      decision: "DECISIÓN",
     },
     contact: {
       tag: "CONTACTO.CANALES",

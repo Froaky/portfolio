@@ -137,6 +137,24 @@ const TECH_META: Record<string, TechMeta> = {
     logos: [{ src: simpleIcon('openapiinitiative', '85EA2D'), label: 'OpenAPI logo' }],
     sub: 'Sec & Perf',
   },
+  Python: {
+    accent: '#3776ab',
+    initials: 'PY',
+    logos: [{ src: simpleIcon('python', '3776AB'), label: 'Python logo' }],
+    sub: 'Core Language',
+  },
+  Odoo: {
+    accent: '#714b67',
+    initials: 'OD',
+    logos: [{ src: simpleIcon('odoo', '9C6B8E'), label: 'Odoo logo' }],
+    sub: 'ERP Platform',
+  },
+  'REST APIs': {
+    accent: '#85ea2d',
+    initials: 'REST',
+    logos: [],
+    sub: 'Integrations',
+  },
 };
 
 const fallbackMeta: TechMeta = {

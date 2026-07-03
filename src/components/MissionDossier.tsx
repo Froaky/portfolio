@@ -2,8 +2,15 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/translations';
 import SystemArchitecture from './SystemArchitecture';
+
+interface Decision {
+  problem: string;
+  decision: string;
+}
 
 interface Project {
   id: string;
@@ -14,49 +21,16 @@ interface Project {
   tech: string[];
   features: string[];
   link: string;
+  decisions: Decision[];
 }
 
 export default function MissionDossier({ project, index }: { project: Project, index: number }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const { lang } = useLanguage();
+  const t = translations[lang];
 
   const isEn = lang === 'en';
-
-  // Custom SVG line charts for different projects to denote knowledge and detail
-  const renderMiniChart = () => {
-    return (
-      <div style={{ position: 'relative', width: '100%', height: '80px', margin: '1rem 0' }}>
-        <span className="mono" style={{ position: 'absolute', top: '-10px', left: '0', fontSize: '0.45rem', opacity: 0.5 }}>
-          {isEn ? "REALTIME_RESPONSE_LATENCY (ms)" : "LATENCIA_RESPUESTA_TIEMPO_REAL (ms)"}
-        </span>
-        <svg width="100%" height="100%" viewBox="0 0 300 80" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-          <defs>
-            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(99, 102, 241, 0.2)" />
-              <stop offset="100%" stopColor="rgba(99, 102, 241, 0)" />
-            </linearGradient>
-          </defs>
-          {/* Grid lines */}
-          <line x1="0" y1="20" x2="300" y2="20" stroke="var(--border)" strokeWidth="0.5" strokeDasharray="3 3" />
-          <line x1="0" y1="50" x2="300" y2="50" stroke="var(--border)" strokeWidth="0.5" strokeDasharray="3 3" />
-          {/* Chart Path */}
-          <path
-            d="M 0 50 Q 30 35 60 48 T 120 25 T 180 55 T 240 30 T 300 35 L 300 80 L 0 80 Z"
-            fill="url(#chartGrad)"
-          />
-          <path
-            d="M 0 50 Q 30 35 60 48 T 120 25 T 180 55 T 240 30 T 300 35"
-            fill="none"
-            stroke="var(--accent)"
-            strokeWidth="1.5"
-          />
-          {/* Active dot */}
-          <circle cx="300" cy="35" r="3" fill="var(--accent)" />
-          <circle cx="300" cy="35" r="6" fill="none" stroke="var(--accent)" strokeWidth="1" opacity="0.5" />
-        </svg>
-      </div>
-    );
-  };
+  const isInternalLink = project.link.startsWith('/');
 
   return (
     <motion.div 
@@ -103,24 +77,30 @@ export default function MissionDossier({ project, index }: { project: Project, i
           {/* Action Buttons */}
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
             {project.link !== '#' && (
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="btn-modern btn-primary-modern"
-              >
-                {isEn ? "VISIT_SITE" : "VISITAR_SITIO"}
-              </a>
+              isInternalLink ? (
+                <Link href={project.link} className="btn-modern btn-primary-modern">
+                  {isEn ? "VIEW_DEMO" : "VER_DEMO"}
+                </Link>
+              ) : (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-modern btn-primary-modern"
+                >
+                  {isEn ? "VISIT_SITE" : "VISITAR_SITIO"}
+                </a>
+              )
             )}
-            
+
             {/* Minimal Interactive Flip Button */}
-            <button 
+            <button
               onClick={() => setIsFlipped(prev => !prev)}
               className="btn-modern"
             >
-              {isFlipped 
+              {isFlipped
                 ? (isEn ? "VIEW_ARCHITECTURE" : "VER_ARQUITECTURA")
-                : (isEn ? "VIEW_METRICS" : "VER_METRICAS")
+                : (isEn ? "VIEW_DECISIONS" : "VER_DECISIONES")
               }
             </button>
 
@@ -170,7 +150,7 @@ export default function MissionDossier({ project, index }: { project: Project, i
               </div>
             </div>
 
-            {/* CARA B: Consola de Métricas y Analítica (Rediseño) */}
+            {/* CARA B: Decisiones de ingeniería reales del proyecto */}
             <div style={{
               position: "absolute",
               inset: 0,
@@ -180,49 +160,34 @@ export default function MissionDossier({ project, index }: { project: Project, i
               padding: "1.75rem",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
               overflow: "hidden",
               boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)"
             }}>
-              {/* Header de la Analítica */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border)", paddingBottom: "0.75rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border)", paddingBottom: "0.75rem", marginBottom: "1.1rem" }}>
                 <span className="mono" style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "1px" }}>
-                  {isEn ? "PERFORMANCE_ANALYTICS" : "ANALITICA_RENDIMIENTO"}
+                  {t.labels.decisions}
                 </span>
                 <span className="mono" style={{ color: "#10b981", fontSize: "0.55rem", background: "rgba(16,185,129,0.08)", padding: "2px 6px", borderRadius: "4px" }}>
-                  {isEn ? "VERIFIED_OK" : "SISTEMA_OK"}
+                  {project.id.toUpperCase().replace(/-/g, '_')}
                 </span>
               </div>
 
-              {/* Mapeo del Gráfico Interactivo */}
-              {renderMiniChart()}
-
-              {/* Cuadrícula de Métricas Técnicas */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", margin: "0.75rem 0" }}>
-                <div style={{ padding: "0.65rem 0.85rem", background: "rgba(255,255,255,0.01)", border: "1px solid var(--border)", borderRadius: "6px" }}>
-                  <div className="mono" style={{ fontSize: "0.5rem", opacity: 0.5 }}>{isEn ? "DATA_INTEGRITY" : "INTEGRIDAD"}</div>
-                  <div style={{ fontSize: "0.8rem", fontWeight: "600", color: "white", marginTop: "2px", fontFamily: "var(--font-sans)" }}>AES-256 / SHA-2</div>
-                </div>
-                <div style={{ padding: "0.65rem 0.85rem", background: "rgba(255,255,255,0.01)", border: "1px solid var(--border)", borderRadius: "6px" }}>
-                  <div className="mono" style={{ fontSize: "0.5rem", opacity: 0.5 }}>{isEn ? "RESPONSE_TIME" : "LATENCIA"}</div>
-                  <div style={{ fontSize: "0.8rem", fontWeight: "600", color: "var(--accent)", marginTop: "2px", fontFamily: "var(--font-sans)" }}>~42ms</div>
-                </div>
-                <div style={{ padding: "0.65rem 0.85rem", background: "rgba(255,255,255,0.01)", border: "1px solid var(--border)", borderRadius: "6px" }}>
-                  <div className="mono" style={{ fontSize: "0.5rem", opacity: 0.5 }}>{isEn ? "CPU_UTILIZATION" : "CARGA_CPU"}</div>
-                  <div style={{ fontSize: "0.8rem", fontWeight: "600", color: "white", marginTop: "2px", fontFamily: "var(--font-sans)" }}>14.8% [AVG]</div>
-                </div>
-                <div style={{ padding: "0.65rem 0.85rem", background: "rgba(255,255,255,0.01)", border: "1px solid var(--border)", borderRadius: "6px" }}>
-                  <div className="mono" style={{ fontSize: "0.5rem", opacity: 0.5 }}>{isEn ? "SCALE_VOLUME" : "ESCALABILIDAD"}</div>
-                  <div style={{ fontSize: "0.8rem", fontWeight: "600", color: "white", marginTop: "2px", fontFamily: "var(--font-sans)" }}>
-                    {project.id === 'salta-rubik' ? "2.4M solves" :
-                     project.id === 'gerayse' ? "15k closings" :
-                     project.id === 'kinnikuapp' ? "8.2k active" :
-                     "100% active cycles"}
+              <div style={{ display: "flex", flexDirection: "column", gap: "1rem", flex: 1, justifyContent: "center" }}>
+                {project.decisions.map((d, i) => (
+                  <div key={i} style={{ paddingLeft: "1rem", borderLeft: "1.5px solid var(--accent)" }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.2rem" }}>
+                      <span className="mono" style={{ fontSize: "0.5rem", color: "var(--text-muted)", flexShrink: 0 }}>{t.labels.problem} ▸</span>
+                      <span style={{ fontSize: "0.78rem", color: "var(--text-muted)", lineHeight: 1.45 }}>{d.problem}</span>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
+                      <span className="mono" style={{ fontSize: "0.5rem", color: "var(--accent)", flexShrink: 0 }}>{t.labels.decision} ▸</span>
+                      <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.88)", lineHeight: 1.45 }}>{d.decision}</span>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
 

@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/lib/translations';
 
@@ -11,9 +12,40 @@ interface TerminalHeroProps {
   desc: string;
 }
 
+const BOOT_TEXT = 'MATEO_COCA // PORTFOLIO_OPS.V3';
+
+function useBootSequence(text: string) {
+  const reducedMotion = useReducedMotion();
+  const [typed, setTyped] = useState('');
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let i = 0;
+    const interval = setInterval(() => {
+      i += 1;
+      setTyped(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(interval);
+        setDone(true);
+      }
+    }, 38);
+
+    return () => clearInterval(interval);
+  }, [text, reducedMotion]);
+
+  // Con reduced-motion no se anima: el texto aparece completo.
+  return {
+    typed: reducedMotion ? text : typed,
+    done: reducedMotion ? true : done,
+  };
+}
+
 export default function TerminalHero({ title, subtitle, desc }: TerminalHeroProps) {
   const { lang } = useLanguage();
   const t = translations[lang];
+  const { typed, done } = useBootSequence(BOOT_TEXT);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -45,14 +77,16 @@ export default function TerminalHero({ title, subtitle, desc }: TerminalHeroProp
       variants={containerVariants}
       className="relative flex flex-col items-start text-left"
     >
-      {/* Muted Premium Category Tag */}
-      <motion.div 
+      {/* Boot-sequence tag: se tipea como terminal al cargar */}
+      <motion.div
         variants={itemVariants}
-        className="mono text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase mb-5 flex items-center gap-3"
+        className="mono text-[0.65rem] tracking-[0.2em] text-zinc-500 uppercase mb-5 flex items-center gap-2"
+        style={{ minHeight: '1.2em' }}
+        aria-label={BOOT_TEXT}
       >
-        <span>MATEO COCA</span>
-        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/80" />
-        <span>PORTFOLIO_OPS.V3</span>
+        <span aria-hidden="true" style={{ color: 'var(--accent)' }}>&gt;</span>
+        <span aria-hidden="true">{typed}</span>
+        <span aria-hidden="true" className={`boot-cursor ${done ? 'boot-cursor-idle' : ''}`} />
       </motion.div>
 
       {/* Main High-Impact Typography Header */}

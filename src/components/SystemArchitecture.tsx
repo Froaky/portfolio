@@ -115,6 +115,30 @@ const get3DSpecs = (id: string, lang: 'en' | 'es'): Project3DSpecs => {
             : ["Libro de Workflows SQL", "Auditoría Logs Acción", "Manejador Bloqueos DB"]
         }
       };
+    case 'odoo-integration-hub':
+      return {
+        client: {
+          title: isEn ? "FIELD TIER" : "CAPA DE CAMPO",
+          sub: isEn ? "Field Devices / Mobile" : "Dispositivos de Campo",
+          details: isEn
+            ? ["Restricted REST Consumers", "Real-time Status Sync", "Inventory Data Capture"]
+            : ["Consumidores REST Restringidos", "Sincro de Estado en Vivo", "Captura de Inventario"]
+        },
+        server: {
+          title: isEn ? "APPLICATION TIER" : "CAPA DE APLICACIÓN",
+          sub: "Custom Odoo Modules",
+          details: isEn
+            ? ["Python Model Extensions", "Restricted REST API", "Webhook Task Routing"]
+            : ["Extensiones Python de Modelos", "REST API Restringida", "Ruteo de Tareas por Webhook"]
+        },
+        db: {
+          title: isEn ? "PERSISTENCE TIER" : "CAPA DE PERSISTENCIA",
+          sub: "PostgreSQL (Odoo Core)",
+          details: isEn
+            ? ["High-frequency Write Indexes", "Single Source of Truth", "ERP Relational Models"]
+            : ["Índices de Escritura Frecuente", "Fuente Única de Verdad", "Modelos Relacionales ERP"]
+        }
+      };
     default:
       return {
         client: {
@@ -241,6 +265,31 @@ export default function SystemArchitecture({ id = 'default' }: { id?: string }) 
             </motion.g>
             <motion.path d="M 195 130 L 195 160 L 60 160 L 60 125" stroke="rgba(255,255,255,0.2)" strokeWidth="0.75" fill="none" strokeDasharray="2 2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1.2 }} />
             <motion.text x="127" y="154" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '4.5px', fontFamily: 'var(--font-sans)' }} initial={{ opacity: 0 }} animate={{ opacity: 0.6 }} transition={{ delay: 2.2 }}>[REJECTED_FALLBACK]</motion.text>
+          </svg>
+        );
+      case 'odoo-integration-hub':
+        return (
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={nodeTransition}>
+              <rect x="20" y="50" width="80" height="40" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="60" y="73" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '5.5px', fontFamily: 'var(--font-mono)', letterSpacing: '1px' }}>FIELD_DEVICE</text>
+              <rect x="20" y="110" width="80" height="40" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="60" y="133" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '5.5px', fontFamily: 'var(--font-mono)', letterSpacing: '1px' }}>FIELD_DEVICE</text>
+            </motion.g>
+            <motion.path d="M 100 70 Q 125 70 125 100 H 150" stroke="var(--border)" strokeWidth="1" fill="none" strokeDasharray="3 3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={lineTransition} />
+            <motion.path d="M 100 130 Q 125 130 125 100 H 150" stroke="var(--border)" strokeWidth="1" fill="none" strokeDasharray="3 3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={lineTransition} />
+            <motion.g initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...nodeTransition, delay: 0.6 }}>
+              <rect x="150" y="70" width="110" height="60" rx="6" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+              <text x="205" y="95" textAnchor="middle" fill="white" style={{ fontSize: '6px', fontWeight: '600', fontFamily: 'var(--font-mono)' }}>ODOO_CORE</text>
+              <text x="205" y="107" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '4.5px', fontFamily: 'var(--font-sans)' }}>[CUSTOM_MODULES + REST_API]</text>
+            </motion.g>
+            <motion.path d="M 260 100 H 310" stroke="var(--border)" strokeWidth="1" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1.2 }} />
+            <motion.g initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...nodeTransition, delay: 1.6 }}>
+              <circle cx="340" cy="100" r="24" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="340" y="102" textAnchor="middle" fill="white" style={{ fontSize: '5.5px', fontFamily: 'var(--font-sans)' }}>POSTGRES</text>
+            </motion.g>
+            <motion.path d="M 205 130 L 205 165 H 290" stroke="rgba(255,255,255,0.2)" strokeWidth="0.75" fill="none" strokeDasharray="2 2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1.4 }} />
+            <motion.text x="300" y="167" textAnchor="start" fill="var(--text-muted)" style={{ fontSize: '4.5px', fontFamily: 'var(--font-sans)' }} initial={{ opacity: 0 }} animate={{ opacity: 0.6 }} transition={{ delay: 2 }}>[WEBHOOK_ALERTS]</motion.text>
           </svg>
         );
       default:
