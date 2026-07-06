@@ -20,7 +20,7 @@ export const translations = {
       results: [
         { value: "4h → 5min", label: "Daily manual sync (Odoo Hub)" },
         { value: "100%", label: "Spreadsheets replaced (Gerayse)" },
-        { value: "4", label: "Systems in production" },
+        { value: "5", label: "Systems in production" },
       ],
     },
     process: {
@@ -87,6 +87,31 @@ export const translations = {
       title: "Featured",
       titleAccent: "Work.",
       items: [
+        {
+          id: "obrastaff",
+          title: "OBRASTAFF",
+          desc: "Documentary-compliance platform for mining, construction and industrial assembly. A single centralized eligibility rule decides — with a traffic light — who is cleared to enter a site.",
+          challenge: "Encoding safety-critical compliance as one rule reused by web, API, dashboard and reports.",
+          impact: "The clearance decision is written once and surfaced right at the site gate — no screen recomputes it.",
+          fullDesc: "A web system that controls personnel, enabling documentation and project assignments for heavy industry. Its core is a single centralized eligibility Action, CheckEmployeeEligibilityForProject, that evaluates a project's active requirements against an employee's documents and returns a typed result — blocking reasons, warnings and what's satisfied. A document's 'effective' status (approved but past its date = doesn't clear) is resolved by one DocumentStatusService, so a date is never compared by hand in two places. The Livewire web UI, the v1 Sanctum API, the dashboard and the PDF/Excel reports all consume the same rule; no screen reimplements it. Seven roles with ~22 granular permissions (spatie/laravel-permission), personnel documents stored on a private disk and served only through Policies, deployed on Railway (FrankenPHP + managed PostgreSQL + persistent volume).",
+          features: ["Centralized Eligibility Rule (single Action)", "Traffic-light Gate Board for site entry", "Effective Document Status (approved + expired = expired)", "7 Roles / ~22 Granular Permissions (RBAC)", "v1 REST API with Sanctum + rate limiting", "PDF & Excel Compliance Reports"],
+          tech: ["Laravel 12", "Livewire 3", "PostgreSQL", "Sanctum API"],
+          link: "https://obrastaff-production.up.railway.app",
+          decisions: [
+            {
+              problem: "The clearance rule is safety-critical — if each screen recomputes it, they drift and someone enters with an expired certificate.",
+              decision: "A single Action, CheckEmployeeEligibilityForProject, owns the rule and returns a typed DTO; web, API, dashboard and reports all consume it.",
+            },
+            {
+              problem: "'Approved' documents expire silently — a valid-looking certificate can be past its date.",
+              decision: "One DocumentStatusService derives the effective status (approved + past date = expired), so a date is never compared by hand in two places.",
+            },
+            {
+              problem: "Personnel documents are sensitive and roles range from HR to external auditors.",
+              decision: "Files live on a private disk served only through Policies; authorization asks for one of ~22 granular permissions, never a hardcoded role.",
+            },
+          ],
+        },
         {
           id: "salta-rubik",
           title: "SALTA RUBIK",
@@ -275,7 +300,7 @@ export const translations = {
       results: [
         { value: "4h → 5min", label: "Sincronización manual diaria (Odoo Hub)" },
         { value: "100%", label: "Planillas reemplazadas (Gerayse)" },
-        { value: "4", label: "Sistemas en producción" },
+        { value: "5", label: "Sistemas en producción" },
       ],
     },
     process: {
@@ -342,6 +367,31 @@ export const translations = {
       title: "Trabajos",
       titleAccent: "Destacados.",
       items: [
+        {
+          id: "obrastaff",
+          title: "OBRASTAFF",
+          desc: "Plataforma de habilitación documental para minería, construcción y montaje industrial. Una única regla de elegibilidad centralizada decide, con semáforo, quién está habilitado para ingresar a la obra.",
+          challenge: "Codificar el cumplimiento crítico de seguridad como una sola regla reutilizada por web, API, dashboard y reportes.",
+          impact: "La decisión de habilitación se escribe una sola vez y se ve en la puerta de la obra — ninguna pantalla la recalcula.",
+          fullDesc: "Sistema web que controla personal, documentación habilitante y asignaciones a obra para industria pesada. Su corazón es una única Action de elegibilidad centralizada, CheckEmployeeEligibilityForProject, que evalúa los requisitos vigentes del proyecto contra los documentos del empleado y devuelve un resultado tipado — motivos bloqueantes, advertencias y lo que cumple. El estado \"efectivo\" de un documento (aprobado pero vencido = no habilita) lo resuelve un único DocumentStatusService, para que una fecha nunca se compare a mano en dos lugares. La web en Livewire, la API v1 con Sanctum, el dashboard y los reportes PDF/Excel consumen la misma regla; ninguna pantalla la reimplementa. Siete roles con ~22 permisos granulares (spatie/laravel-permission), documentos de personal en disco privado servidos solo a través de Policies, desplegado en Railway (FrankenPHP + PostgreSQL gestionado + volumen persistente).",
+          features: ["Regla de Elegibilidad Centralizada (una sola Action)", "Tablero de Habilitación con semáforo en portería", "Estado Documental Efectivo (aprobado + vencido = vencido)", "7 Roles / ~22 Permisos Granulares (RBAC)", "API REST v1 con Sanctum + rate limiting", "Reportes de Cumplimiento en PDF y Excel"],
+          tech: ["Laravel 12", "Livewire 3", "PostgreSQL", "Sanctum API"],
+          link: "https://obrastaff-production.up.railway.app",
+          decisions: [
+            {
+              problem: "La regla de habilitación es crítica para la seguridad: si cada pantalla la recalcula, se desincronizan y alguien ingresa con un certificado vencido.",
+              decision: "Una única Action, CheckEmployeeEligibilityForProject, es dueña de la regla y devuelve un DTO tipado; web, API, dashboard y reportes la consumen.",
+            },
+            {
+              problem: "Los documentos \"aprobados\" vencen en silencio: un certificado que parece válido puede estar fuera de fecha.",
+              decision: "Un único DocumentStatusService deriva el estado efectivo (aprobado + fecha pasada = vencido), para que la fecha nunca se compare a mano en dos lugares.",
+            },
+            {
+              problem: "Los documentos de personal son datos sensibles y los roles van de RRHH a auditores externos.",
+              decision: "Los archivos viven en disco privado servidos solo por Policies; la autorización pregunta por uno de ~22 permisos granulares, nunca por un rol hardcodeado.",
+            },
+          ],
+        },
         {
           id: "salta-rubik",
           title: "SALTA RUBIK",

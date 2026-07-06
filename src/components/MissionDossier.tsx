@@ -15,6 +15,7 @@ interface Decision {
 
 // Capturas reales de cada sistema (tomadas de los deploys en producción / demo local)
 const SCREENSHOTS: Record<string, { src: string; domain: string }> = {
+  'obrastaff': { src: '/screenshots/obrastaff.png', domain: 'obrastaff-production.up.railway.app' },
   'salta-rubik': { src: '/screenshots/salta-rubik.png', domain: 'timer-salta-rubik-production.up.railway.app' },
   'gerayse': { src: '/screenshots/gerayse.png', domain: 'gerayse10-production.up.railway.app' },
   'kinnikuapp': { src: '/screenshots/kinnikuapp.png', domain: 'kinnikuapp.com' },

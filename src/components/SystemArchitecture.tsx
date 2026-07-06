@@ -19,6 +19,30 @@ interface Project3DSpecs {
 const get3DSpecs = (id: string, lang: 'en' | 'es'): Project3DSpecs => {
   const isEn = lang === 'en';
   switch (id) {
+    case 'obrastaff':
+      return {
+        client: {
+          title: isEn ? "CLIENT TIER" : "CAPA CLIENTE",
+          sub: "Livewire 3 / Blade UI",
+          details: isEn
+            ? ["Traffic-light Gate Board", "Compliance KPI Dashboard", "Policies reused in views (@can)"]
+            : ["Tablero Semáforo Portería", "Dashboard KPIs Cumplimiento", "Policies reusadas en vista (@can)"]
+        },
+        server: {
+          title: isEn ? "APPLICATION TIER" : "CAPA DE APLICACIÓN",
+          sub: "Laravel 12 / Domain Actions",
+          details: isEn
+            ? ["CheckEligibility — single rule", "DocumentStatusService (effective)", "Sanctum v1 API + RBAC Policies"]
+            : ["CheckEligibility — regla única", "DocumentStatusService (efectivo)", "API v1 Sanctum + Policies RBAC"]
+        },
+        db: {
+          title: isEn ? "PERSISTENCE TIER" : "CAPA DE PERSISTENCIA",
+          sub: "PostgreSQL (Railway)",
+          details: isEn
+            ? ["Portable Migrations (SQLite/PG)", "JSON eligibility audit trail", "Private disk for documents"]
+            : ["Migraciones Portables (SQLite/PG)", "Auditoría elegibilidad en JSON", "Disco privado para documentos"]
+        }
+      };
     case 'salta-rubik':
       return {
         client: {
@@ -178,6 +202,43 @@ export default function SystemArchitecture({ id = 'default' }: { id?: string }) 
 
   const render2DDiagram = () => {
     switch (id) {
+      case 'obrastaff':
+        return (
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* Inputs: employee + project */}
+            <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={nodeTransition}>
+              <rect x="12" y="55" width="80" height="38" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="52" y="77" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '5.5px', fontFamily: 'var(--font-mono)', letterSpacing: '1px' }}>EMPLOYEE</text>
+              <rect x="12" y="108" width="80" height="38" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="52" y="130" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '5.5px', fontFamily: 'var(--font-mono)', letterSpacing: '1px' }}>PROJECT</text>
+            </motion.g>
+            <motion.path d="M 92 74 Q 121 74 121 100 H 150" stroke="var(--border)" strokeWidth="1" fill="none" strokeDasharray="3 3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={lineTransition} />
+            <motion.path d="M 92 127 Q 121 127 121 100 H 150" stroke="var(--border)" strokeWidth="1" fill="none" strokeDasharray="3 3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={lineTransition} />
+
+            {/* Central rule */}
+            <motion.g initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...nodeTransition, delay: 0.6 }}>
+              <rect x="150" y="72" width="100" height="56" rx="6" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+              <text x="200" y="96" textAnchor="middle" fill="white" style={{ fontSize: '5.5px', fontWeight: '600', fontFamily: 'var(--font-mono)' }}>ELIGIBILITY_RULE</text>
+              <text x="200" y="108" textAnchor="middle" fill="var(--text-muted)" style={{ fontSize: '4.5px', fontFamily: 'var(--font-sans)' }}>[SINGLE_ACTION]</text>
+            </motion.g>
+
+            {/* Consumers */}
+            <motion.path d="M 250 100 Q 285 100 285 43 H 312" stroke="var(--border)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1 }} />
+            <motion.path d="M 250 100 Q 285 100 285 77 H 312" stroke="var(--border)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1 }} />
+            <motion.path d="M 250 100 Q 285 100 285 123 H 312" stroke="var(--border)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1 }} />
+            <motion.path d="M 250 100 Q 285 100 285 157 H 312" stroke="var(--border)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ ...lineTransition, delay: 1 }} />
+            <motion.g initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} transition={{ ...nodeTransition, delay: 1.4 }}>
+              <rect x="312" y="30" width="76" height="26" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="350" y="46" textAnchor="middle" fill="white" style={{ fontSize: '5px', fontFamily: 'var(--font-sans)' }}>WEB</text>
+              <rect x="312" y="64" width="76" height="26" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="350" y="80" textAnchor="middle" fill="white" style={{ fontSize: '5px', fontFamily: 'var(--font-sans)' }}>API_V1</text>
+              <rect x="312" y="110" width="76" height="26" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="350" y="126" textAnchor="middle" fill="white" style={{ fontSize: '5px', fontFamily: 'var(--font-sans)' }}>DASHBOARD</text>
+              <rect x="312" y="144" width="76" height="26" rx="4" fill="rgba(255, 255, 255, 0.02)" stroke="var(--border)" strokeWidth="1" />
+              <text x="350" y="160" textAnchor="middle" fill="white" style={{ fontSize: '5px', fontFamily: 'var(--font-sans)' }}>REPORTS</text>
+            </motion.g>
+          </svg>
+        );
       case 'kinnikuapp':
         return (
           <svg className="w-full h-full" viewBox="0 0 400 200">
